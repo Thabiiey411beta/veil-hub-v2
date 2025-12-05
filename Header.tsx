@@ -60,7 +60,7 @@ export function Header() {
                       {connector.id === 'starkey' && <span className="text-purple-400">⭐</span>}
                       <span>{connector.name === 'Injected' && connector.id === 'starkey' ? 'Starkey Wallet' : connector.name}</span>
                     </button>
-                  ))
+                  ))}
                 </div>
               </div>
             )}

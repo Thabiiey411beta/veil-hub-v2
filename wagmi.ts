@@ -1,6 +1,6 @@
 import { createConfig, http } from 'wagmi'
 import { defineChain } from 'viem'
-import { metaMask, walletConnect, coinbaseWallet, injected } from 'wagmi/connectors'
+import { walletConnect, injected } from 'wagmi/connectors'
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'demo'
 
@@ -30,10 +30,8 @@ const supraEVM = defineChain({
 export const config = createConfig({
   chains: [supraEVM],
   connectors: [
-    injected({ target: 'starkey' }),
-    metaMask(),
+    injected(),
     walletConnect({ projectId }),
-    coinbaseWallet({ appName: 'Veil Hub' }),
   ],
   transports: {
     [supraEVM.id]: http(),

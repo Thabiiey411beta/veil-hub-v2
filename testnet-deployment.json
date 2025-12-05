@@ -1,0 +1,7 @@
+{
+  "network": "SupraEVM Testnet",
+  "chainId": 2,
+  "treasury": "0x9516494976a6de49218b86c96cceac7eb0366de6610d068e861b3636beec1915",
+  "rpc": "https://rpc-testnet.supra.com",
+  "explorer": "https://testnet.suprascan.io"
+}

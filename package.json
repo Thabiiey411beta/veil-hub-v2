@@ -9,7 +9,8 @@
     "lint": "next lint",
     "compile": "hardhat compile",
     "deploy:supra": "hardhat run deploy.js --network supra",
-    "deploy:dev": "node deploy-testnet.js"
+    "deploy:dev": "node deploy-testnet.js",
+    "test:deploy": "echo 'Testing deployment...' && node deploy-testnet.js"
   },
   "dependencies": {
     "next": "^14.2.0",
@@ -31,7 +32,7 @@
     "lucide-react": "^0.363.0",
     "framer-motion": "^11.0.0",
     "clsx": "^2.1.0",
-    "supra-l1-sdk": "^1.0.0",
+
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
     "hardhat": "^2.19.0",
     "ethers": "^6.9.0"

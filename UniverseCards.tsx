@@ -1,6 +1,6 @@
 'use client'
 
-import { Users, Crown, Whale, ArrowRight } from 'lucide-react'
+import { Users, Crown, Fish, ArrowRight } from 'lucide-react'
 
 export function UniverseCards() {
   return (
@@ -113,7 +113,7 @@ export function UniverseCards() {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className="p-4 bg-yellow-500/20 rounded-lg">
-                  <Whale className="text-yellow-400" size={32} />
+                  <Fish className="text-yellow-400" size={32} />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-yellow-400 mb-2">Whale Mode</h3>
