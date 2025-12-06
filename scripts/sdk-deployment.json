@@ -1,0 +1,16 @@
+{
+  "network": "supra-testnet",
+  "deployer": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e",
+  "timestamp": "2025-12-06T19:58:53.729Z",
+  "txHash": {
+    "txHash": "0x57b4e95d265b726c05ada323770ce57d3f8bd7f25f5af6c8f5a8964fd8fca6d0",
+    "result": "Pending"
+  },
+  "modules": [
+    "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::veil_token",
+    "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::immortal_reserve",
+    "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::debt_engine",
+    "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::veveil",
+    "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::buyback_engine"
+  ]
+}
