@@ -1,3 +1,5 @@
+import TechnicalIndicators from '@/components/TechnicalIndicators'
+
 export default function Vaults() {
   return (
     <div className="min-h-screen bg-black text-white p-8">
@@ -5,7 +7,12 @@ export default function Vaults() {
         <h1 className="text-5xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
           Vaults
         </h1>
-        <p className="text-xl text-gray-300 mb-8">ERC-4626 vaults with leveraged strategies</p>
+        <p className="text-xl text-gray-300 mb-8">ERC-4626 vaults with AI-powered strategies</p>
+        
+        <div className="mb-8">
+          <TechnicalIndicators />
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {['USDC Vault', 'wstETH Vault', 'cbBTC Vault'].map((vault) => (
             <div key={vault} className="p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl">

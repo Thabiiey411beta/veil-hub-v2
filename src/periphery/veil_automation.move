@@ -3,6 +3,7 @@ module veil_hub::veil_automation {
     use supra_framework::event;
     use std::signer;
     use std::error;
+    use veil_hub::veil_indicators;
 
     struct AutomationState has key {
         last_harvest_time: u64,
@@ -39,7 +40,7 @@ module veil_hub::veil_automation {
         });
     }
 
-    /// Auto-harvest with Supra DORA price verification
+    /// Auto-harvest with Supra DORA price verification and technical indicators
     public entry fun auto_harvest_yields(account: &signer) acquires AutomationState {
         let account_addr = signer::address_of(account);
         assert!(exists<AutomationState>(account_addr), error::not_found(E_NOT_INITIALIZED));
@@ -47,8 +48,12 @@ module veil_hub::veil_automation {
         let state = borrow_global_mut<AutomationState>(account_addr);
         let current_time = timestamp::now_seconds();
         
-        // Condition: Only harvest if 7 days passed
+        // Condition: Only harvest if 7 days passed AND market is bullish
         if (current_time < state.last_harvest_time + HARVEST_INTERVAL) {
+            return
+        };
+        
+        if (!veil_indicators::should_auto_harvest()) {
             return
         };
         
