@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -11,8 +12,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Veil Hub - The Final DeFi Organism',
-  description: 'Zero-liquidation DeFi protocol with perpetual yield on SupraEVM',
-  keywords: 'DeFi, SupraEVM, yield farming, zero liquidation, crypto',
+  description: 'Zero-liquidation DeFi protocol on Supra L1',
+  keywords: 'DeFi, Supra L1, yield farming, zero liquidation, crypto',
 }
 
 export const viewport = {
@@ -28,12 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <link rel="preconnect" href="https://rpc-testnet.supra.com" />
-        <link rel="dns-prefetch" href="https://testnet.suprascan.io" />
-      </head>
       <body className={inter.className}>
         <Providers>
+          <Toaster position="top-right" />
           {children}
         </Providers>
       </body>

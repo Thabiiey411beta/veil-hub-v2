@@ -2,28 +2,11 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { Menu, X, Wallet } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import ConnectWallet from '../components/ConnectWallet'
 
 export default function PremiumLanding() {
-  const [isConnected, setIsConnected] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [address, setAddress] = useState('')
-
-  const connectWallet = async () => {
-    if (typeof window !== 'undefined' && (window as any).ethereum) {
-      try {
-        const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' })
-        setAddress(accounts[0])
-        setIsConnected(true)
-      } catch (error) {
-        console.error('Failed to connect wallet:', error)
-      }
-    } else {
-      alert('Please install MetaMask or Starkey wallet')
-    }
-  }
-
-  const formatAddress = (addr: string) => `${addr.slice(0, 6)}...${addr.slice(-4)}`
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -87,15 +70,13 @@ export default function PremiumLanding() {
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-            The most powerful DeFi super-protocol on <span className="text-cyan-400 font-semibold">SupraEVM</span>.
+            The most powerful DeFi super-protocol on <span className="text-cyan-400 font-semibold">Supra L1</span>.
             <br />
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">No KYC. No liquidations. Pure yield.</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
-            <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-semibold rounded-xl hover:scale-105 transition-transform duration-200">
-              Launch Protocol
-            </button>
+            <ConnectWallet />
             <button className="px-8 py-4 bg-white/5 backdrop-blur-lg border border-white/10 text-gray-300 hover:text-white rounded-xl transition-colors duration-300">
               Read Documentation
             </button>
@@ -108,28 +89,23 @@ export default function PremiumLanding() {
               { value: '4.2x', suffix: '', label: 'Maximum Leverage', icon: '⚡' },
               { value: '6-25%', suffix: ' APY', label: 'USDC Yield Range', icon: '📈' }
             ].map((stat, i) => (
-              <div key={i} className="p-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl hover:bg-white/10 hover:scale-105 transition-all duration-300">
+              <motion.div 
+                key={i} 
+                className="p-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl hover:bg-white/10 hover:scale-105 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
                 <div className="text-4xl mb-4">{stat.icon}</div>
                 <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
                   {stat.value}{stat.suffix}
                 </div>
                 <p className="text-gray-400">{stat.label}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Floating Wallet Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button
-          onClick={connectWallet}
-          className="px-6 py-4 bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-semibold rounded-xl hover:scale-105 transition-transform duration-200 shadow-2xl flex items-center space-x-2"
-        >
-          <Wallet size={20} />
-          <span>{isConnected ? formatAddress(address) : 'Connect Wallet'}</span>
-        </button>
-      </div>
     </div>
   )
 }
