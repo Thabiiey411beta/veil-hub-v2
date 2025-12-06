@@ -26,11 +26,11 @@ export default function PremiumLanding() {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="/protocol" className="text-gray-300 hover:text-white transition-colors duration-300">Protocol</a>
+            <a href="/protocol" className="text-gray-300 hover:text-white transition-colors duration-300">Hub</a>
+            <a href="/finance" className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 font-semibold">Finance</a>
             <a href="/borrow" className="text-gray-300 hover:text-white transition-colors duration-300">Borrow</a>
             <a href="/vaults" className="text-gray-300 hover:text-white transition-colors duration-300">Vaults</a>
             <a href="/governance" className="text-gray-300 hover:text-white transition-colors duration-300">Governance</a>
-            <a href="/docs" className="text-gray-300 hover:text-white transition-colors duration-300">Docs</a>
           </nav>
 
           <button
