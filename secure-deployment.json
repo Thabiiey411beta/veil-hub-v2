@@ -1,0 +1,22 @@
+{
+  "network": "SupraEVM Testnet",
+  "chainId": 2,
+  "deployer": "0xa2525317402889d48AF009E1ae4E5a8baAa6e11c",
+  "treasury": "0x9516494976a6de49218b86c96cceac7eb0366de6610d068e861b3636beec1915",
+  "rpc": "https://rpc-testnet.supra.com",
+  "explorer": "https://testnet.suprascan.io",
+  "security": {
+    "reentrancyGuard": true,
+    "pausable": true,
+    "accessControl": true,
+    "maxSupplyCap": true,
+    "zeroAddressChecks": true
+  },
+  "contracts": {
+    "veilToken": "DEPLOYED",
+    "immortalReserve": "DEPLOYED",
+    "vaultFactory": "DEPLOYED",
+    "debtEngine": "DEPLOYED"
+  },
+  "timestamp": "2025-12-06T05:41:57.291Z"
+}

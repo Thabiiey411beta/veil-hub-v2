@@ -10,6 +10,7 @@
     "compile": "hardhat compile",
     "deploy:supra": "hardhat run deploy.js --network supra",
     "deploy:dev": "node deploy-testnet.js",
+    "deploy:secure": "node deploy-secure.js",
     "test:deploy": "echo 'Testing deployment...' && node deploy-testnet.js"
   },
   "dependencies": {

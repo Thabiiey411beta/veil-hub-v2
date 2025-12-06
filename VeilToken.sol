@@ -4,12 +4,14 @@ pragma solidity ^0.8.24;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 
 /**
  * @title VEIL Token
  * @dev ERC20 token with permit functionality and controlled minting
  */
-contract VeilToken is ERC20, ERC20Permit, Ownable {
+contract VeilToken is ERC20, ERC20Permit, Ownable, ReentrancyGuard, Pausable {
     uint256 public constant MAX_SUPPLY = 1_000_000_000 * 10**18; // 1 billion tokens
     
     mapping(address => bool) public minters;
@@ -46,16 +48,20 @@ contract VeilToken is ERC20, ERC20Permit, Ownable {
     /**
      * @dev Mint tokens (only by authorized minters)
      */
-    function mint(address to, uint256 amount) external {
+    function mint(address to, uint256 amount) external nonReentrant whenNotPaused {
         require(minters[msg.sender], "Not authorized to mint");
         require(totalSupply() + amount <= MAX_SUPPLY, "Exceeds max supply");
+        require(to != address(0), "Cannot mint to zero address");
+        require(amount > 0, "Amount must be greater than 0");
         _mint(to, amount);
     }
     
     /**
      * @dev Burn tokens from caller's balance
      */
-    function burn(uint256 amount) external {
+    function burn(uint256 amount) external nonReentrant whenNotPaused {
+        require(amount > 0, "Amount must be greater than 0");
+        require(balanceOf(msg.sender) >= amount, "Insufficient balance");
         _burn(msg.sender, amount);
         emit TokensBurned(msg.sender, amount);
     }
