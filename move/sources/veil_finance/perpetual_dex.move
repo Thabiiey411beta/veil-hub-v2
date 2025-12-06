@@ -53,9 +53,10 @@ module veil_hub::perpetual_dex {
         let market = borrow_global_mut<Market>(@veil_hub);
         let config = borrow_global_mut<PerpConfig>(@veil_hub);
 
-        // Calculate fee
+        // Calculate fee (60% burn, 40% to veVEIL stakers)
         let fee = (size * TRADING_FEE_BPS) / 10000;
-        market.accumulated_fees = market.accumulated_fees + fee;
+        let burn_amount = (fee * 60) / 100;
+        market.accumulated_fees = market.accumulated_fees + burn_amount;
         config.total_fees_collected = config.total_fees_collected + fee;
         config.total_volume = config.total_volume + (size as u128);
 

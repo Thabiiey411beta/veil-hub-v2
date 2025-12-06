@@ -27,8 +27,11 @@ module veil_hub::shadow_gas {
         account: &signer,
         veil_amount: u64
     ) acquires ShadowGasBalance, ShadowGasConfig {
+        // Apply 60% burn cap, 40% to treasury
+        let actual_burn = (veil_amount * 60) / 100;
+        
         // Burn VEIL tokens
-        let coins = coin::withdraw<VeilToken>(account, veil_amount);
+        let coins = coin::withdraw<VeilToken>(account, actual_burn);
         coin::burn(coins, &borrow_global<veil_hub::veil_token::VeilCap>(@veil_hub).burn_cap);
 
         // Calculate Shadow Gas
