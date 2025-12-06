@@ -1,0 +1,56 @@
+{
+  "network": "supra-testnet",
+  "deployer": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e",
+  "timestamp": "2025-12-06T18:56:13.564Z",
+  "tasks": [
+    {
+      "name": "Auto Harvest Yields",
+      "module": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::veil_automation",
+      "function": "auto_harvest_yields",
+      "interval": "7 days",
+      "conditions": [
+        "Pending yield > 100 USDC",
+        "Market conditions favorable",
+        "Gas price < threshold"
+      ],
+      "description": "Automatically harvest vault yields and distribute to Immortal Reserve"
+    },
+    {
+      "name": "Auto Repay Debt",
+      "module": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::veil_automation",
+      "function": "auto_repay_debt",
+      "interval": "1 hour",
+      "conditions": [
+        "Collateral ratio < 130%",
+        "Position at risk",
+        "USDC available in reserve"
+      ],
+      "description": "Automatically repay debt when positions approach liquidation"
+    },
+    {
+      "name": "Auto Buyback & Burn",
+      "module": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::buyback_engine",
+      "function": "execute_buyback",
+      "interval": "1 day",
+      "conditions": [
+        "USDC reserve > 1000",
+        "VEIL price favorable",
+        "Slippage < 2%"
+      ],
+      "description": "Execute buyback with 30% of interest revenue and burn VEIL"
+    },
+    {
+      "name": "Distribute Dividends",
+      "module": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::immortal_reserve",
+      "function": "distribute_dividends",
+      "interval": "7 days",
+      "conditions": [
+        "USDC balance > 0",
+        "Immortal shares > 0",
+        "Week elapsed"
+      ],
+      "description": "Distribute weekly USDC dividends to Immortal Share holders"
+    }
+  ],
+  "status": "configured"
+}
