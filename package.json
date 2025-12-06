@@ -11,7 +11,9 @@
     "deploy:supra": "hardhat run deploy.js --network supra",
     "deploy:dev": "node deploy-testnet.js",
     "deploy:secure": "node deploy-secure.js",
-    "test:deploy": "echo 'Testing deployment...' && node deploy-testnet.js"
+    "test:deploy": "echo 'Testing deployment...' && node deploy-testnet.js",
+    "analyze": "ANALYZE=true npm run build",
+    "audit:security": "npm audit --audit-level moderate"
   },
   "dependencies": {
     "next": "^14.2.0",
@@ -25,10 +27,10 @@
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
     "@tailwindcss/forms": "^0.5.7",
-    "wagmi": "^2.5.0",
-    "viem": "^2.7.0",
-    "@wagmi/core": "^2.6.0",
-    "@wagmi/connectors": "^4.1.0",
+    "wagmi": "^2.12.0",
+    "viem": "^2.19.0",
+    "@wagmi/core": "^2.13.0",
+    "@wagmi/connectors": "^5.0.0",
     "@tanstack/react-query": "^5.28.0",
     "lucide-react": "^0.363.0",
     "framer-motion": "^11.0.0",
@@ -37,6 +39,11 @@
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
     "hardhat": "^2.19.0",
     "ethers": "^6.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.0",
+    "@next/bundle-analyzer": "^14.2.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

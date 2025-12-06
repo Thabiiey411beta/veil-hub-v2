@@ -1,6 +1,6 @@
 'use client'
 
-import { Header } from '../Header'
+import { Header } from '../Header-fixed'
 import { Hero } from '../Hero'
 import { UniverseCards } from '../UniverseCards'
 import { Stats } from '../Stats'

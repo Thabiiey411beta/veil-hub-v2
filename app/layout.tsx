@@ -3,11 +3,18 @@ import { Inter } from 'next/font/google'
 import '../globals.css'
 import { Providers } from '../providers'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true
+})
 
 export const metadata: Metadata = {
   title: 'Veil Hub - The Final DeFi Organism',
-  description: 'Next-gen DeFi protocol with zero-liquidation borrowing, perpetual yield, and leveraged vaults',
+  description: 'Zero-liquidation DeFi protocol with perpetual yield on SupraEVM',
+  keywords: 'DeFi, SupraEVM, yield farming, zero liquidation, crypto',
+  viewport: 'width=device-width, initial-scale=1',
+  themeColor: '#8b5cf6',
 }
 
 export default function RootLayout({
@@ -17,6 +24,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="preconnect" href="https://rpc-testnet.supra.com" />
+        <link rel="dns-prefetch" href="https://testnet.suprascan.io" />
+      </head>
       <body className={inter.className}>
         <Providers>
           {children}

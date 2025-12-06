@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useEffect } from 'react'
 import { Menu, X, Wallet } from 'lucide-react'
 
 export function Header() {
