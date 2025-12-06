@@ -17,4 +17,9 @@ git = "https://github.com/Entropy-Foundation/dora-interface"
 subdir = "supra/testnet/core"
 rev = "master"
 
+[dependencies.SupraVrf]
+git = "https://github.com/Entropy-Foundation/vrf-interface"
+subdir = "supra/testnet"
+rev = "testnet"
+
 [dev-dependencies]

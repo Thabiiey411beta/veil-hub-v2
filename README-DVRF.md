@@ -35,23 +35,39 @@ Veil Hub uses Supra's decentralized Verifiable Random Function (dVRF) for tamper
 - **Ethereum Router**: `0x23726e27Ec79d421cf58C815D37748AfCaFeC9e4`
 - **Ethereum Deposit**: `0xb63b8391e666d21958b8b3459840594A12055D2d`
 
-## Setup Subscription
+## Setup (Supra L1)
 
-1. Visit https://supra.com/data/dvrf
-2. Connect wallet and create subscription
-3. Configure gas: Max Price 50 gwei, Max Limit 500k
-4. Deposit funds (min 0.1 ETH for testnet)
-5. Whitelist VeilVRF contract
+1. **Create Subscription**: Visit https://supra.com/data/dvrf
+2. **Connect StarKey Wallet**
+3. **Set Max Transaction Fee** (e.g., 1,000,000 units)
+4. **Receive Supra Credits**: Auto-granted for initial requests
+5. **Deploy Module**: Auto-whitelists via `init_module()`
+6. **Deposit $SUPRA**: When credits exhausted
 
-## Usage
+## Usage (Supra L1 V3)
 
-### Move (Supra L1)
 ```move
-// Request randomness
-veil_dvrf::request_vault_randomness(&signer, 6);
+// Request (returns nonce)
+veil_dvrf::request_vault_randomness(
+    1,  // rng_count
+    0,  // client_seed
+    6   // num_confirmations
+);
 
-// Get strategy
-let strategy = veil_dvrf::get_random_strategy();
+// Callback auto-called by Supra
+public entry fun vault_callback(
+    nonce: u64,
+    message: vector<u8>,
+    signature: vector<u8>,
+    caller_address: address,
+    rng_count: u8,
+    client_seed: u64
+) {
+    // Verifies and stores random numbers
+}
+
+// Get strategy by nonce
+let strategy = veil_dvrf::get_random_strategy(nonce);
 ```
 
 ### Solidity (EVM)
@@ -83,21 +99,33 @@ uint128 balance = veilVRF.getBalance();
 - **Threshold**: T+1 of N nodes required
 - **Verification**: Same as centralized VRF (seamless upgrade)
 
-## Gas Configuration
+## Configuration
 
-**EVM**: Max Gas Price 50 gwei, Max Gas Limit 500k  
-**Supra L1**: Max Txn Fee set at wallet whitelist  
-**Minimum Balance**: 30 requests × max fee
+**Supra L1 V3**
+- Max Transaction Fee: Set at subscription creation
+- Minimum Balance: max_txn_fee × 30 requests
+- Supra Credits: Free grant covers initial usage
+- Deposit: $SUPRA tokens after grant exhausted
+
+**EVM Chains**
+- Max Gas Price: 50 gwei
+- Max Gas Limit: 500k
+- Deposit: Native token (ETH, etc.)
 
 ## Monitoring
 
+**Supra L1**
+```move
+// Check via subscription manager UI
+// - Total balance (Credits + Deposits)
+// - Minimum balance threshold
+// - Alert at 300%, 100%, 25% levels
+```
+
+**EVM**
 ```solidity
 uint128 balance = veilVRF.getBalance();
 uint128 minBalance = veilVRF.getMinBalance();
-
-if (balance < minBalance * 3) {
-    // Alert: Plan deposit
-}
 ```
 
 ## Best Practices
