@@ -32,24 +32,45 @@ module veil_hub::veil_indicators {
         }
     }
 
-    /// Check RSI for oversold/overbought conditions
+    /// Check RSI for oversold/overbought conditions (RSI scaled 0-100)
     #[view]
     public fun check_rsi_signal(pair_id: u32): Option<u8> {
         let (rsi, _) = supra_oracle_ti::compute_rsi(pair_id, 14, FOUR_HOURS, TOLERANCE);
         
         if (option::is_some(&rsi)) {
             let rsi_value = *option::borrow(&rsi);
-            let rsi_scaled = (rsi_value / 100000000) as u8; // Scale down from DECIMAL_BUFFER
+            // RSI already in 0-100 range, scaled by DECIMAL_BUFFER (10^8)
+            let rsi_scaled = (rsi_value / 100000000) as u8;
             
             if (rsi_scaled < 30) {
-                option::some(1) // Oversold - buy signal
+                option::some(1) // Oversold
             } else if (rsi_scaled > 70) {
-                option::some(2) // Overbought - sell signal
+                option::some(2) // Overbought
             } else {
                 option::some(0) // Neutral
             }
         } else {
             option::none()
+        }
+    }
+
+    /// Multi-timeframe confirmation (1H and 4H alignment)
+    #[view]
+    public fun check_multi_timeframe_trend(pair_id: u32): bool {
+        let (ema_1h, _, _) = supra_oracle_ti::compute_ema(pair_id, 20, ONE_HOUR, TOLERANCE);
+        let (ema_4h, _, _) = supra_oracle_ti::compute_ema(pair_id, 20, FOUR_HOURS, TOLERANCE);
+        let sma_1h = supra_oracle_ti::compute_sma(pair_id, 20, ONE_HOUR, TOLERANCE);
+        let sma_4h = supra_oracle_ti::compute_sma(pair_id, 20, FOUR_HOURS, TOLERANCE);
+        
+        if (option::is_some(&ema_1h) && option::is_some(&sma_1h) &&
+            option::is_some(&ema_4h) && option::is_some(&sma_4h)) {
+            let e1 = *option::borrow(&ema_1h);
+            let s1 = *option::borrow(&sma_1h);
+            let e4 = *option::borrow(&ema_4h);
+            let s4 = *option::borrow(&sma_4h);
+            (e1 > s1) && (e4 > s4)
+        } else {
+            false
         }
     }
 

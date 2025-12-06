@@ -40,7 +40,7 @@ module veil_hub::veil_automation {
         });
     }
 
-    /// Auto-harvest with Supra DORA price verification and technical indicators
+    /// Auto-harvest with technical indicators and multi-timeframe confirmation
     public entry fun auto_harvest_yields(account: &signer) acquires AutomationState {
         let account_addr = signer::address_of(account);
         assert!(exists<AutomationState>(account_addr), error::not_found(E_NOT_INITIALIZED));
@@ -48,12 +48,18 @@ module veil_hub::veil_automation {
         let state = borrow_global_mut<AutomationState>(account_addr);
         let current_time = timestamp::now_seconds();
         
-        // Condition: Only harvest if 7 days passed AND market is bullish
+        // Condition 1: Time interval (7 days)
         if (current_time < state.last_harvest_time + HARVEST_INTERVAL) {
             return
         };
         
+        // Condition 2: Market bullish on both BTC and ETH
         if (!veil_indicators::should_auto_harvest()) {
+            return
+        };
+        
+        // Condition 3: Multi-timeframe confirmation (1H and 4H aligned)
+        if (!veil_indicators::check_multi_timeframe_trend(0)) { // BTC
             return
         };
         
