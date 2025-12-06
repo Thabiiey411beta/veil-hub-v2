@@ -1,0 +1,49 @@
+{
+  "network": "supra-testnet",
+  "deployer": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e",
+  "timestamp": "2025-12-06T19:00:00.998Z",
+  "activations": [
+    {
+      "module": "veil_token",
+      "function": "initialize",
+      "status": "activated",
+      "result": {
+        "total_supply": "1000000000_00000000",
+        "decimals": 8,
+        "minted_to": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e"
+      }
+    },
+    {
+      "module": "immortal_reserve",
+      "function": "initialize",
+      "status": "activated",
+      "result": {
+        "total_shares": 0,
+        "total_burned": 0,
+        "burn_bonus": "1.5x"
+      }
+    },
+    {
+      "module": "debt_engine",
+      "function": "initialize",
+      "status": "activated",
+      "result": {
+        "interest_rate": "5.5%",
+        "min_collateral_ratio": "180%",
+        "liquidation_ratio": "120%"
+      }
+    },
+    {
+      "module": "buyback_engine",
+      "function": "initialize",
+      "status": "activated",
+      "result": {
+        "usdc_reserve": 0,
+        "veil_burned": 0,
+        "buyback_percentage": "30%"
+      }
+    }
+  ],
+  "tests_passed": 3,
+  "status": "fully-activated"
+}
