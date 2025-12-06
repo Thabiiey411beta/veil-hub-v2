@@ -1,0 +1,14 @@
+[package]
+name = "veil_hub"
+version = "14.0.0"
+authors = []
+
+[addresses]
+veil_hub = "0x9516494976a6de49218b86c96cceac7eb0366de6610d068e861b3636beec1915"
+
+[dependencies.SupraFramework]
+git = "https://github.com/Entropy-Foundation/aptos-core.git"
+rev = "dev"
+subdir = "aptos-move/framework/supra-framework"
+
+[dev-dependencies]
