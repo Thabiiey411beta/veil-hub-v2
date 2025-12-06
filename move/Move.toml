@@ -1,0 +1,9 @@
+[package]
+name = "VeilHub"
+version = "14.0.0"
+
+[addresses]
+veil_hub = "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e"
+
+[dependencies]
+SupraFramework = { git = "https://github.com/Entropy-Foundation/supra-framework.git", subdir = "supra-framework", rev = "main" }
