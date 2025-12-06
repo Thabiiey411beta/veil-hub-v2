@@ -14,11 +14,11 @@ async function deploy() {
 
   // Check balance
   try {
-    const accountInfo = await client.getAccountInfo(DEPLOYER_ADDRESS);
-    const balance = Number(accountInfo.balance || 0) / 1e18;
-    console.log('💰 Balance:', balance, 'SUPRA\n');
+    const balance = await client.getAccountSupraCoinBalance(DEPLOYER_ADDRESS);
+    const balanceSupra = Number(balance) / 1e8;
+    console.log('💰 Balance:', balanceSupra, 'SUPRA\n');
 
-    if (balance < 5) {
+    if (balanceSupra < 5) {
       console.log('❌ Insufficient balance. Need at least 5 SUPRA');
       console.log('🔗 Get testnet funds: https://faucet.testnet.supra.com/');
       process.exit(1);

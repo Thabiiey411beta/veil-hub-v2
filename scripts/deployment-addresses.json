@@ -1,0 +1,16 @@
+{
+  "network": "supra-testnet",
+  "chainId": 6,
+  "deployer": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e",
+  "timestamp": "2025-12-06T18:35:34.417Z",
+  "contracts": {
+    "VeilToken": "0x4f54bbfd7f7d1",
+    "VeVEIL": "0xe2a0a1587285b",
+    "ImmortalReserve": "0x53c07dfc68633",
+    "DebtEngine": "0xd947b8d04e79a",
+    "BuybackEngine": "0xb8252c6545587",
+    "VeilVault": "0x8e1b1bdef37fe",
+    "VaultFactory": "0xc8befdfd01a2f",
+    "TokenDistribution": "0x185064bdeb43f"
+  }
+}
