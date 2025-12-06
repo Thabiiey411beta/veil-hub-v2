@@ -1,0 +1,14 @@
+{
+  "network": "supra-testnet",
+  "chainId": 6,
+  "deployer": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e",
+  "timestamp": "2025-12-06T18:46:00.593Z",
+  "modules": {
+    "veil_token": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::veil_token",
+    "immortal_reserve": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::immortal_reserve",
+    "debt_engine": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::debt_engine",
+    "veveil": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::veveil",
+    "buyback_engine": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e::buyback_engine"
+  },
+  "status": "deployed"
+}
