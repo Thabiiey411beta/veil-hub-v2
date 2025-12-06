@@ -23,8 +23,16 @@ export const config = createConfig(
   connectkit({
     chains: [supraTestnet, supraMainnet],
     transports: {
-      [supraMainnet.id]: http("https://rpc.supra.com", { timeout: 30000 }),
-      [supraTestnet.id]: http("https://rpc-testnet.supra.com", { timeout: 30000 }),
+      [supraMainnet.id]: http("https://rpc.supra.com", { 
+        timeout: 30000,
+        batch: false,
+        fetchOptions: { cache: 'no-store' },
+      }),
+      [supraTestnet.id]: http("https://rpc-testnet.supra.com", { 
+        timeout: 30000,
+        batch: false,
+        fetchOptions: { cache: 'no-store' },
+      }),
     },
     walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo",
     appName: "Veil Hub",
