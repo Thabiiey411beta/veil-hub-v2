@@ -27,6 +27,7 @@ export default function PremiumLanding() {
           
           <nav className="hidden md:flex items-center space-x-8">
             <a href="/protocol" className="text-gray-300 hover:text-white transition-colors duration-300">Protocol</a>
+            <a href="/borrow" className="text-gray-300 hover:text-white transition-colors duration-300">Borrow</a>
             <a href="/vaults" className="text-gray-300 hover:text-white transition-colors duration-300">Vaults</a>
             <a href="/governance" className="text-gray-300 hover:text-white transition-colors duration-300">Governance</a>
             <a href="/docs" className="text-gray-300 hover:text-white transition-colors duration-300">Docs</a>
@@ -44,6 +45,7 @@ export default function PremiumLanding() {
           <div className="md:hidden mt-4 p-4 bg-gray-900/50 backdrop-blur-lg rounded-lg">
             <nav className="flex flex-col space-y-4">
               <a href="/protocol" className="text-gray-300 hover:text-white transition-colors">Protocol</a>
+              <a href="/borrow" className="text-gray-300 hover:text-white transition-colors">Borrow</a>
               <a href="/vaults" className="text-gray-300 hover:text-white transition-colors">Vaults</a>
               <a href="/governance" className="text-gray-300 hover:text-white transition-colors">Governance</a>
               <a href="/docs" className="text-gray-300 hover:text-white transition-colors">Docs</a>
@@ -75,10 +77,12 @@ export default function PremiumLanding() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
-            <ConnectWallet />
-            <button className="px-8 py-4 bg-white/5 backdrop-blur-lg border border-white/10 text-gray-300 hover:text-white rounded-xl transition-colors duration-300">
+            <a href="/protocol" className="px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-purple-500/50">
+              Launch Protocol
+            </a>
+            <a href="/docs" className="px-8 py-4 bg-white/5 backdrop-blur-lg border border-white/10 text-gray-300 hover:text-white rounded-xl transition-colors duration-300">
               Read Documentation
-            </button>
+            </a>
           </div>
 
           {/* Live Prices */}
