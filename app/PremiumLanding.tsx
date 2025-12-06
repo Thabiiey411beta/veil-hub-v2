@@ -25,11 +25,10 @@ export default function PremiumLanding() {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            {['Protocol', 'Vaults', 'Governance', 'Docs'].map((item) => (
-              <a key={item} href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                {item}
-              </a>
-            ))}
+            <a href="/protocol" className="text-gray-300 hover:text-white transition-colors duration-300">Protocol</a>
+            <a href="/vaults" className="text-gray-300 hover:text-white transition-colors duration-300">Vaults</a>
+            <a href="/governance" className="text-gray-300 hover:text-white transition-colors duration-300">Governance</a>
+            <a href="/docs" className="text-gray-300 hover:text-white transition-colors duration-300">Docs</a>
           </nav>
 
           <button
@@ -43,11 +42,10 @@ export default function PremiumLanding() {
         {isMenuOpen && (
           <div className="md:hidden mt-4 p-4 bg-gray-900/50 backdrop-blur-lg rounded-lg">
             <nav className="flex flex-col space-y-4">
-              {['Protocol', 'Vaults', 'Governance', 'Docs'].map((item) => (
-                <a key={item} href="#" className="text-gray-300 hover:text-white transition-colors">
-                  {item}
-                </a>
-              ))}
+              <a href="/protocol" className="text-gray-300 hover:text-white transition-colors">Protocol</a>
+              <a href="/vaults" className="text-gray-300 hover:text-white transition-colors">Vaults</a>
+              <a href="/governance" className="text-gray-300 hover:text-white transition-colors">Governance</a>
+              <a href="/docs" className="text-gray-300 hover:text-white transition-colors">Docs</a>
             </nav>
           </div>
         )}
