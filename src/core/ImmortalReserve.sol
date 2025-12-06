@@ -6,12 +6,14 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+import "../interfaces/IImmortalReserve.sol";
 
 /**
  * @title Immortal Reserve
  * @dev Manages perpetual USDC dividends for Immortal Share holders
  */
-contract ImmortalReserve is ERC20, Ownable, ReentrancyGuard {
+contract ImmortalReserve is IImmortalReserve, ERC20, Ownable, ReentrancyGuard, Pausable {
     using SafeERC20 for IERC20;
     
     IERC20 public immutable usdc;
@@ -41,7 +43,7 @@ contract ImmortalReserve is ERC20, Ownable, ReentrancyGuard {
     /**
      * @dev Burn VEIL tokens to receive Immortal Shares (1:1 ratio)
      */
-    function burnVeilForImmortalShares(uint256 veilAmount) external nonReentrant {
+    function burnVeilForImmortalShares(uint256 veilAmount) external override nonReentrant whenNotPaused {
         require(veilAmount > 0, "Amount must be greater than 0");
         
         // Transfer and burn VEIL tokens
@@ -59,7 +61,8 @@ contract ImmortalReserve is ERC20, Ownable, ReentrancyGuard {
     /**
      * @dev Receive revenue from protocol (vault fees, borrow interest, LP VACUUM)
      */
-    function receiveRevenue(uint256 amount) external {
+    function receiveRevenue(uint256 amount) external override whenNotPaused {
+        require(amount > 0, "Invalid amount");
         usdc.safeTransferFrom(msg.sender, address(this), amount);
         emit RevenueReceived(msg.sender, amount);
     }
@@ -67,7 +70,7 @@ contract ImmortalReserve is ERC20, Ownable, ReentrancyGuard {
     /**
      * @dev Calculate pending dividends for a user
      */
-    function pendingDividends(address user) public view returns (uint256) {
+    function pendingDividends(address user) public view override returns (uint256) {
         if (totalSupply() == 0) return 0;
         
         uint256 userShares = balanceOf(user);
@@ -86,7 +89,7 @@ contract ImmortalReserve is ERC20, Ownable, ReentrancyGuard {
     /**
      * @dev Claim accumulated dividends
      */
-    function claimDividends() external nonReentrant {
+    function claimDividends() external override nonReentrant whenNotPaused {
         uint256 dividend = pendingDividends(msg.sender);
         require(dividend > 0, "No dividends to claim");
         
@@ -155,8 +158,22 @@ contract ImmortalReserve is ERC20, Ownable, ReentrancyGuard {
      * @dev Update weekly distribution rate (governance function)
      */
     function updateDistributionRate(uint256 newRate) external onlyOwner {
-        require(newRate <= 500, "Rate too high"); // Max 5% per week
+        require(newRate <= 500, "Rate too high");
+        require(newRate > 0, "Rate too low");
         weeklyDistributionRate = newRate;
+    }
+    
+    function pause() external onlyOwner {
+        _pause();
+    }
+    
+    function unpause() external onlyOwner {
+        _unpause();
+    }
+    
+    function emergencyWithdraw(address token, uint256 amount) external onlyOwner {
+        require(token != address(usdc), "Cannot withdraw USDC");
+        IERC20(token).safeTransfer(owner(), amount);
     }
     
     /**

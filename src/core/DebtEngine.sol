@@ -3,15 +3,19 @@ pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "../libraries/SafeMath.sol";
+import "../interfaces/IDebtEngine.sol";
 
 /**
  * @title Debt Engine
  * @dev Zero-liquidation borrowing at 5.5% fixed APR
  */
-contract DebtEngine is Ownable, ReentrancyGuard {
+contract DebtEngine is IDebtEngine, Ownable, ReentrancyGuard, Pausable {
     using SafeERC20 for IERC20;
+    using VeilMath for uint256;
     
     struct Position {
         uint256 collateralAmount;
@@ -23,7 +27,11 @@ contract DebtEngine is Ownable, ReentrancyGuard {
     
     mapping(address => Position) public positions;
     mapping(address => bool) public supportedCollateral;
-    mapping(address => uint256) public collateralPrices; // USD price with 8 decimals
+    mapping(address => uint256) public collateralPrices;
+    
+    address public oracleContract;
+    uint256 public emergencyShutdownTime;
+    bool public emergencyShutdown;
     
     uint256 public constant FIXED_INTEREST_RATE = 550; // 5.5% in basis points
     uint256 public constant MIN_COLLATERAL_RATIO = 18000; // 180% in basis points
@@ -70,12 +78,14 @@ contract DebtEngine is Ownable, ReentrancyGuard {
         address collateralAsset,
         uint256 collateralAmount,
         uint256 borrowAmount
-    ) external nonReentrant {
+    ) external override nonReentrant whenNotPaused {
         require(supportedCollateral[collateralAsset], "Unsupported collateral");
-        require(positions[msg.sender].active == false, "Position already exists");
+        require(!positions[msg.sender].active, "Position already exists");
+        require(collateralAmount > 0, "Invalid collateral amount");
+        require(borrowAmount > 0, "Invalid borrow amount");
         
         uint256 collateralValue = getCollateralValue(collateralAsset, collateralAmount);
-        uint256 collateralRatio = (collateralValue * 10000) / borrowAmount;
+        uint256 collateralRatio = VeilMath.calculateCollateralRatio(collateralValue, borrowAmount);
         
         require(collateralRatio >= MIN_COLLATERAL_RATIO, "Insufficient collateral");
         
@@ -102,7 +112,7 @@ contract DebtEngine is Ownable, ReentrancyGuard {
     /**
      * @dev Repay debt and close position
      */
-    function closePosition() external nonReentrant {
+    function closePosition() external override nonReentrant {
         Position storage position = positions[msg.sender];
         require(position.active, "No active position");
         
@@ -137,13 +147,16 @@ contract DebtEngine is Ownable, ReentrancyGuard {
     /**
      * @dev Calculate total debt including accrued interest
      */
-    function calculateTotalDebt(address user) public view returns (uint256) {
+    function calculateTotalDebt(address user) public view override returns (uint256) {
         Position memory position = positions[user];
         if (!position.active) return 0;
         
         uint256 timeElapsed = block.timestamp - position.lastUpdate;
-        uint256 annualInterest = (position.debtAmount * FIXED_INTEREST_RATE) / 10000;
-        uint256 accruedInterest = (annualInterest * timeElapsed) / 365 days;
+        uint256 accruedInterest = VeilMath.calculateInterest(
+            position.debtAmount,
+            FIXED_INTEREST_RATE,
+            timeElapsed
+        );
         
         return position.debtAmount + accruedInterest;
     }
@@ -162,13 +175,13 @@ contract DebtEngine is Ownable, ReentrancyGuard {
     /**
      * @dev Check if position is at risk (for auto-repay trigger)
      */
-    function isPositionAtRisk(address user) external view returns (bool) {
+    function isPositionAtRisk(address user) external view override returns (bool) {
         Position memory position = positions[user];
         if (!position.active) return false;
         
         uint256 collateralValue = getCollateralValue(position.collateralAsset, position.collateralAmount);
         uint256 totalDebt = calculateTotalDebt(user);
-        uint256 collateralRatio = (collateralValue * 10000) / totalDebt;
+        uint256 collateralRatio = VeilMath.calculateCollateralRatio(collateralValue, totalDebt);
         
         return collateralRatio < LIQUIDATION_THRESHOLD;
     }
@@ -184,6 +197,29 @@ contract DebtEngine is Ownable, ReentrancyGuard {
      * @dev Add supported collateral
      */
     function addCollateral(address asset) external onlyOwner {
+        require(asset != address(0), "Invalid asset");
         supportedCollateral[asset] = true;
+    }
+    
+    function setOracleContract(address _oracle) external onlyOwner {
+        require(_oracle != address(0), "Invalid oracle");
+        oracleContract = _oracle;
+    }
+    
+    function pause() external onlyOwner {
+        _pause();
+    }
+    
+    function unpause() external onlyOwner {
+        _unpause();
+    }
+    
+    function emergencyWithdraw() external nonReentrant {
+        require(emergencyShutdown, "Not in emergency mode");
+        Position storage position = positions[msg.sender];
+        require(position.active, "No active position");
+        
+        IERC20(position.collateralAsset).safeTransfer(msg.sender, position.collateralAmount);
+        delete positions[msg.sender];
     }
 }
