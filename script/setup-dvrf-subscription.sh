@@ -1,0 +1,27 @@
+#!/bin/bash
+# Setup Supra dVRF Subscription for Veil Hub
+
+ROUTER_TESTNET="0x7e0EA6e335EDA42f4c256246f62c6c3DCf4d4908"
+DEPOSIT_TESTNET="0x7d63aa8468e8c4c60395ad423271f45bb34df0fd"
+CLIENT_WALLET="0x9516494976a6de49218b86c96cceac7eb0366de6610d068e861b3636beec1915"
+
+echo "🌑 Setting up Veil Hub dVRF Subscription..."
+echo ""
+echo "Step 1: Visit https://supra.com/data/dvrf"
+echo "Step 2: Connect wallet: $CLIENT_WALLET"
+echo "Step 3: Create subscription with:"
+echo "  - Max Gas Price: 50 gwei"
+echo "  - Max Gas Limit: 500,000"
+echo ""
+echo "Step 4: Deposit funds (minimum 0.1 ETH recommended)"
+echo ""
+echo "Step 5: Whitelist VeilVRF contract after deployment"
+echo ""
+echo "Testnet Addresses:"
+echo "  Router: $ROUTER_TESTNET"
+echo "  Deposit: $DEPOSIT_TESTNET"
+echo ""
+echo "For Supra L1, use subscription manager UI to:"
+echo "  1. Whitelist wallet with max_txn_fee"
+echo "  2. Initialize VRF module"
+echo "  3. Deposit SUPRA tokens"

@@ -3,62 +3,57 @@ module veil_hub::veil_dvrf {
     use std::signer;
     use std::vector;
 
-    struct RandomnessRequest has key {
+    struct VRFState has key {
         nonce: u64,
         last_random: vector<u8>,
+        permit: supra_vrf::SupraVRFPermit<VRFState>,
     }
 
     const E_NOT_INITIALIZED: u64 = 1;
 
+    /// Initialize module and get VRF permit
     fun init_module(account: &signer) {
-        move_to(account, RandomnessRequest {
+        let permit = supra_vrf::init_vrf_module<VRFState>(account);
+        move_to(account, VRFState {
             nonce: 0,
             last_random: vector::empty(),
+            permit,
         });
     }
 
-    /// Request random number for vault strategy selection
-    public entry fun request_randomness(
+    /// Request random number for vault strategy
+    public entry fun request_vault_randomness(
         account: &signer,
-        num_confirmations: u8,
-        client_seed: vector<u8>
-    ) acquires RandomnessRequest {
-        let account_addr = signer::address_of(account);
-        assert!(exists<RandomnessRequest>(account_addr), E_NOT_INITIALIZED);
-        
-        let state = borrow_global_mut<RandomnessRequest>(account_addr);
+        num_confirmations: u8
+    ) acquires VRFState {
+        let state = borrow_global_mut<VRFState>(@veil_hub);
         state.nonce = state.nonce + 1;
         
-        // Request dVRF from Supra network
         supra_vrf::rng_request(
             account,
+            &state.permit,
             num_confirmations,
-            client_seed,
             state.nonce
         );
     }
 
-    /// Callback to receive random number from Supra dVRF
-    public entry fun callback_randomness(
-        _account: &signer,
+    /// Callback from Supra dVRF
+    public entry fun vrf_callback(
         nonce: u64,
         random_bytes: vector<u8>
-    ) acquires RandomnessRequest {
-        let account_addr = @veil_hub;
-        let state = borrow_global_mut<RandomnessRequest>(account_addr);
-        
+    ) acquires VRFState {
+        let state = borrow_global_mut<VRFState>(@veil_hub);
         if (nonce == state.nonce) {
             state.last_random = random_bytes;
         };
     }
 
-    /// Get random strategy index (0-2) for vault rebalancing
+    /// Get random strategy (0-2)
     #[view]
-    public fun get_random_strategy(): u8 acquires RandomnessRequest {
-        let state = borrow_global<RandomnessRequest>(@veil_hub);
+    public fun get_random_strategy(): u8 acquires VRFState {
+        let state = borrow_global<VRFState>(@veil_hub);
         if (vector::length(&state.last_random) > 0) {
-            let first_byte = *vector::borrow(&state.last_random, 0);
-            (first_byte % 3) // Returns 0, 1, or 2
+            (*vector::borrow(&state.last_random, 0) % 3)
         } else {
             0
         }

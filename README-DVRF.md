@@ -35,28 +35,38 @@ Veil Hub uses Supra's decentralized Verifiable Random Function (dVRF) for tamper
 - **Ethereum Router**: `0x23726e27Ec79d421cf58C815D37748AfCaFeC9e4`
 - **Ethereum Deposit**: `0xb63b8391e666d21958b8b3459840594A12055D2d`
 
+## Setup Subscription
+
+1. Visit https://supra.com/data/dvrf
+2. Connect wallet and create subscription
+3. Configure gas: Max Price 50 gwei, Max Limit 500k
+4. Deposit funds (min 0.1 ETH for testnet)
+5. Whitelist VeilVRF contract
+
 ## Usage
 
 ### Move (Supra L1)
 ```move
 // Request randomness
-veil_dvrf::request_randomness(
-    &signer,
-    6,  // num_confirmations
-    b"client_seed"
-);
+veil_dvrf::request_vault_randomness(&signer, 6);
 
-// Get random strategy (0-2)
+// Get strategy
 let strategy = veil_dvrf::get_random_strategy();
 ```
 
 ### Solidity (EVM)
 ```solidity
-// Request randomness
-uint256 requestId = supraVRF.requestRandomness(6);
+// Deposit funds
+veilVRF.depositFunds{value: 0.1 ether}();
 
-// Get random strategy in callback
-uint8 strategy = supraVRF.getRandomStrategy();
+// Request
+veilVRF.requestVaultRandomness(6);
+
+// Get strategy
+uint8 strategy = veilVRF.getRandomStrategy();
+
+// Monitor balance
+uint128 balance = veilVRF.getBalance();
 ```
 
 ## Use Cases in Veil Hub
@@ -73,14 +83,26 @@ uint8 strategy = supraVRF.getRandomStrategy();
 - **Threshold**: T+1 of N nodes required
 - **Verification**: Same as centralized VRF (seamless upgrade)
 
-## Gas Costs
-- Request: ~100k gas (EVM)
-- Callback: ~50k gas (EVM)
-- Move: Minimal (native L1)
+## Gas Configuration
+
+**EVM**: Max Gas Price 50 gwei, Max Gas Limit 500k  
+**Supra L1**: Max Txn Fee set at wallet whitelist  
+**Minimum Balance**: 30 requests × max fee
+
+## Monitoring
+
+```solidity
+uint128 balance = veilVRF.getBalance();
+uint128 minBalance = veilVRF.getMinBalance();
+
+if (balance < minBalance * 3) {
+    // Alert: Plan deposit
+}
+```
 
 ## Best Practices
-1. Use sufficient confirmations (6+ recommended)
-2. Include unique client seed per request
-3. Handle callback asynchronously
-4. Verify randomness in callback
-5. Store nonce for request tracking
+1. Maintain balance > 300% minimum
+2. Use 6+ confirmations
+3. Monitor balance alerts
+4. Test callback gas usage
+5. Update limits based on network
