@@ -63,9 +63,9 @@ contract VeilVault is ERC4626, ReentrancyGuard, Pausable, Ownable {
         
         if (profit > 0) {
             uint256 fee = (profit * performanceFee) / 10000;
-            uint256 burned = (fee * 50) / 100;
-            uint256 toImmortal = (fee * 30) / 100;
-            uint256 toVeVeil = fee - burned - toImmortal;
+            uint256 burned = (fee * 60) / 100;
+            uint256 toImmortal = (fee * 25) / 100;
+            uint256 toVeVeil = (fee * 15) / 100;
             
             IERC20(asset()).transfer(feeRecipient, burned);
             IERC20(asset()).transfer(immortalReserve, toImmortal);

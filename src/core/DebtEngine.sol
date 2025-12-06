@@ -124,16 +124,16 @@ contract DebtEngine is IDebtEngine, Ownable, ReentrancyGuard, Pausable {
         // Return collateral
         IERC20(position.collateralAsset).safeTransfer(msg.sender, position.collateralAmount);
         
-        // Distribute interest (70% to Immortal Reserve, 20% to veVEIL, 10% to Treasury)
+        // Distribute interest: 50% Immortal, 30% Buyback, 20% veVEIL
         uint256 interest = totalDebt - position.debtAmount;
         if (interest > 0) {
-            uint256 toImmortal = (interest * 7000) / 10000;
+            uint256 toImmortal = (interest * 5000) / 10000;
+            uint256 toBuyback = (interest * 3000) / 10000;
             uint256 toVeVeil = (interest * 2000) / 10000;
-            uint256 toTreasury = interest - toImmortal - toVeVeil;
             
             IERC20(usdc).safeTransfer(immortalReserve, toImmortal);
+            IERC20(usdc).safeTransfer(treasury, toBuyback); // Treasury = Buyback Engine
             IERC20(usdc).safeTransfer(veVeilGauge, toVeVeil);
-            IERC20(usdc).safeTransfer(treasury, toTreasury);
         }
         
         totalDebt -= position.debtAmount;
