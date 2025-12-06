@@ -12,8 +12,7 @@
     "deploy:dev": "node deploy-testnet.js",
     "deploy:secure": "node deploy-secure.js",
     "test:deploy": "echo 'Testing deployment...' && node deploy-testnet.js",
-    "analyze": "ANALYZE=true npm run build",
-    "audit:security": "npm audit --audit-level moderate"
+
   },
   "dependencies": {
     "next": "^14.2.0",
@@ -38,9 +37,7 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.0",
-    "@next/bundle-analyzer": "^14.2.0",
-    "@types/minimatch": "^5.1.2"
+    "eslint-config-next": "^14.2.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
