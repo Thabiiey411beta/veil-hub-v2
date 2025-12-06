@@ -1,0 +1,17 @@
+{
+  "network": "supra-testnet",
+  "deployer": "0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e",
+  "timestamp": "2025-12-06T20:02:11.325Z",
+  "tasks": [
+    {
+      "task": "Auto Harvest Yields",
+      "status": "failed",
+      "error": "Request failed with status code 400"
+    },
+    {
+      "task": "Auto Repay Debt",
+      "status": "failed",
+      "error": "Request failed with status code 400"
+    }
+  ]
+}
