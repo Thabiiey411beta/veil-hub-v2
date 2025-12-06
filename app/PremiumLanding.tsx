@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import ConnectWallet from '../components/ConnectWallet'
+import PriceWidget from '../components/PriceWidget'
 
 export default function PremiumLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -78,6 +79,11 @@ export default function PremiumLanding() {
             <button className="px-8 py-4 bg-white/5 backdrop-blur-lg border border-white/10 text-gray-300 hover:text-white rounded-xl transition-colors duration-300">
               Read Documentation
             </button>
+          </div>
+
+          {/* Live Prices */}
+          <div className="mb-16">
+            <PriceWidget />
           </div>
 
           {/* Stats Grid */}
