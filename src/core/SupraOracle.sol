@@ -22,10 +22,10 @@ interface ISupraOraclePull {
 contract SupraOracle is Ownable {
     ISupraOraclePull public oracle;
     
-    // Pair indexes for Veil Hub assets
-    uint256 public constant ETH_USD = 0;
-    uint256 public constant BTC_USD = 1;
-    uint256 public constant USDC_USD = 49;
+    // Supra DORA pair indexes (from official docs)
+    uint256 public constant BTC_USDT = 0;  // Supra Premium
+    uint256 public constant ETH_USDT = 1;  // Supra Premium
+    uint256 public constant LINK_USDT = 2; // Supra Premium
     
     event PriceUpdated(uint256 indexed pair, uint256 price, uint256 timestamp);
     event OracleAddressUpdated(address indexed newOracle);

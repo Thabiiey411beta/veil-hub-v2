@@ -1,0 +1,26 @@
+{
+  "testnet": {
+    "chainId": 9999,
+    "name": "Supra L1 Testnet",
+    "pullOracle": "0x6bf7b21145Cbd7BB0b9916E6eB24EDA8A675D7C0",
+    "storageContract": "0x6Cd59830AAD978446e6cc7f6cc173aF7656Fb917",
+    "rpcUrl": "https://rpc-testnet.supra.com"
+  },
+  "mainnet": {
+    "chainId": 999,
+    "name": "Supra L1 Mainnet",
+    "pullOracle": "TBD",
+    "storageContract": "TBD",
+    "rpcUrl": "https://rpc-mainnet.supra.com"
+  },
+  "pairs": {
+    "BTC_USDT": 0,
+    "ETH_USDT": 1,
+    "LINK_USDT": 2,
+    "DOGE_USDT": 3,
+    "BCH_USDT": 4,
+    "AVAX_USDT": 5,
+    "DOT_USDT": 6,
+    "AAVE_USDT": 7
+  }
+}
