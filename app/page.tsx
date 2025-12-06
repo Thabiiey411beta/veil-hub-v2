@@ -9,8 +9,8 @@ import { Footer } from '../Footer'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black">
-      <div className="grid-bg min-h-screen">
+    <div style={{minHeight: '100vh', background: 'linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a1a1a 100%)'}}>
+      <div style={{minHeight: '100vh', color: 'white'}}>
         <Header />
         <main>
           <Hero />

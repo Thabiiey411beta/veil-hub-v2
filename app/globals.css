@@ -3,35 +3,63 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    color-scheme: dark;
+  * {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
   }
   
   body {
-    @apply bg-black text-white font-sans antialiased;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a1a1a 100%);
-    background-attachment: fixed;
+    color: white;
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
   }
 }
 
 @layer components {
   .cyber-card {
-    @apply border border-gray-800/50 bg-gray-900/30 backdrop-blur-xl rounded-2xl p-6;
-    @apply hover:border-purple-500/30 hover:bg-gray-900/50 transition-all duration-300;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: rgba(17, 17, 17, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+  }
+  
+  .cyber-card:hover {
+    border-color: rgba(139, 92, 246, 0.6);
+    background: rgba(17, 17, 17, 0.9);
   }
   
   .cyber-button {
-    @apply px-6 py-3 bg-gradient-to-r from-purple-600 to-cyan-500 text-white font-semibold rounded-xl;
-    @apply hover:from-purple-500 hover:to-cyan-400 transform hover:scale-105 transition-all duration-200;
-    @apply shadow-lg hover:shadow-purple-500/25 active:scale-95;
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .cyber-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
   }
   
   .neon-text {
-    text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+    text-shadow: 0 0 20px currentColor;
   }
   
   .glass-effect {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
   }
 }
