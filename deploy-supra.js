@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const PRIVATE_KEY = '1c8d05fe8e1522b842d997f9f64dc765ee57154ba3258799aea100cf0fa98dd3';
 const RPC_URL = 'https://rpc-testnet.supra.com';
+const CHAIN_ID = 6;
 
 async function deploy() {
     console.log('🚀 Veil Hub v14 - Supra Testnet Deployment\n');
@@ -26,7 +27,7 @@ async function deploy() {
     const deployment = {
         deployer: address,
         network: 'supra-testnet',
-        chainId: 6,
+        chainId: CHAIN_ID,
         rpc: RPC_URL,
         balance: balanceNum,
         timestamp: new Date().toISOString(),
