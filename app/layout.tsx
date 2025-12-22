@@ -1,7 +1,13 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Home, BarChart3, Target, Lock, Vote, Book, Menu, X, Bell, Settings, User, LogOut, ChevronDown, Wallet } from 'lucide-react';
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
@@ -12,7 +18,7 @@ export default function RootLayout({ children }) {
     { name: 'Vaults', href: '/vaults', icon: Target },
     { name: 'Borrow', href: '/borrow', icon: Lock },
     { name: 'Governance', href: '/governance', icon: Vote },
-    { name: 'Docs', href: '/docs', icon: Book }
+    { name: 'Docs', href: '/docs', icon: Book },
   ];
 
   return (
@@ -65,19 +71,16 @@ export default function RootLayout({ children }) {
 
               {/* Right Side Actions */}
               <div className="flex items-center gap-3">
-                {/* Network Selector */}
                 <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-slate-800/50 rounded-lg border border-slate-700">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                   <span className="text-sm">Supra L1</span>
                 </div>
 
-                {/* Notifications */}
                 <button className="relative p-2 rounded-lg hover:bg-slate-800 transition-colors">
                   <Bell className="w-5 h-5" />
                   <div className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
                 </button>
 
-                {/* Connect Wallet / User Menu */}
                 {isConnected ? (
                   <div className="relative">
                     <button
@@ -156,10 +159,8 @@ export default function RootLayout({ children }) {
           {children}
         </main>
 
-        {/* Toast Notifications Container */}
-        <div className="fixed bottom-4 right-4 z-50 space-y-2">
-          {/* Toast notifications will appear here */}
-        </div>
+        {/* Toast Container */}
+        <div className="fixed bottom-4 right-4 z-50 space-y-2" />
       </body>
     </html>
   );
