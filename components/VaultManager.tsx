@@ -326,9 +326,9 @@ const VaultManager = () => {
                             <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                             <XAxis dataKey="day" stroke="#64748b" />
                             <YAxis stroke="#64748b" domain={[85, 125]} />
-                            <Tooltip 
+                            <Tooltip
                               contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                              formatter={(value) => `${value.toFixed(2)}%`}
+                              formatter={(value: any) => (value != null ? `${Number(value).toFixed(2)}%` : '')}
                             />
                             <Area type="monotone" dataKey="value" stroke="#8b5cf6" fill="url(#vaultPerf)" strokeWidth={2} name="Vault" />
                             <Line type="monotone" dataKey="benchmark" stroke="#64748b" strokeWidth={1} strokeDasharray="5 5" name="Benchmark" />
