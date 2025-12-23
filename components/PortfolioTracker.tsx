@@ -98,9 +98,10 @@ const PortfolioTracker = () => {
     { type: 'Funding Payment', date: '1 hour', amount: '$12.34', action: 'View' }
   ];
 
-  const formatValue = (value) => {
+  const formatValue = (value: any): string => {
     if (hideBalance) return '••••••';
-    return `$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    const num = Number(value) || 0;
+    return `$${num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   };
 
   return (
