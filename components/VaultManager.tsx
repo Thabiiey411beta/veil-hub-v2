@@ -121,7 +121,7 @@ const VaultManager = () => {
   };
 
   // Risk metrics for selected vault
-  const generateRiskMetrics = (vault) => {
+  const generateRiskMetrics = (vault: any) => {
     if (!vault) return [];
     return [
       { metric: 'Volatility', value: vault.risk === 'low' ? 45 : vault.risk === 'medium' ? 65 : 85 },
