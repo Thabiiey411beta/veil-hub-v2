@@ -2,7 +2,9 @@ declare module 'supra-l1-sdk' {
 	export class SupraAccount {
 		constructor(seedOrBuffer: any);
 	}
-	export type HexString = string;
+	export class HexString {
+		constructor(s: string);
+	}
 	export const BCS: {
 		bcsSerializeUint64: (v: bigint) => any;
 	};
