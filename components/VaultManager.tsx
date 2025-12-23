@@ -355,16 +355,16 @@ const VaultManager = () => {
                       <div>
                         <h4 className="text-lg font-bold mb-4">Asset Allocation</h4>
                         <div className="space-y-3">
-                          {Object.entries(vault.allocation).map(([asset, percent]) => (
+                          {Object.entries(vault.allocation).map(([asset, percent]: [string, any]) => (
                             <div key={asset}>
                               <div className="flex justify-between text-sm mb-1">
                                 <span className="text-slate-400">{asset}</span>
-                                <span className="font-bold">{percent}%</span>
+                                <span className="font-bold">{Number(percent)}%</span>
                               </div>
                               <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
                                 <div 
                                   className="h-full bg-gradient-to-r from-violet-500 to-pink-500"
-                                  style={{ width: `${percent}%` }}
+                                  style={{ width: `${Number(percent)}%` }}
                                 />
                               </div>
                             </div>
