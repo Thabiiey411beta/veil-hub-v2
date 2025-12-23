@@ -187,7 +187,7 @@ const VeilAnalyticsDashboard = () => {
               <YAxis stroke="#64748b" />
               <Tooltip 
                 contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                formatter={(value) => `$${(value / 1000000).toFixed(2)}M`}
+                formatter={(value: any) => (value != null ? `$${(Number(value) / 1000000).toFixed(2)}M` : '')}
               />
               <Area type="monotone" dataKey="tvl" stroke="#8b5cf6" fill="url(#tvlGradient)" strokeWidth={2} />
               <Area type="monotone" dataKey="volume" stroke="#ec4899" fill="url(#volumeGradient)" strokeWidth={2} />
@@ -205,7 +205,7 @@ const VeilAnalyticsDashboard = () => {
               <YAxis stroke="#64748b" />
               <Tooltip 
                 contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                formatter={(value) => `$${(value / 1000).toFixed(0)}K`}
+                formatter={(value: any) => (value != null ? `$${(Number(value) / 1000).toFixed(0)}K` : '')}
               />
               <Legend />
               <Bar dataKey="borrowing" stackId="a" fill="#8b5cf6" radius={[0, 0, 0, 0]} />
@@ -236,7 +236,7 @@ const VeilAnalyticsDashboard = () => {
               </Pie>
               <Tooltip 
                 contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                formatter={(value) => `${(value / 1000000).toFixed(0)}M VEIL`}
+                formatter={(value: any) => (value != null ? `${(Number(value) / 1000000).toFixed(0)}M VEIL` : '')}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -277,7 +277,7 @@ const VeilAnalyticsDashboard = () => {
             <YAxis stroke="#64748b" />
             <Tooltip 
               contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-              formatter={(value) => `${value.toFixed(2)}%`}
+              formatter={(value: any) => (value != null ? `${Number(value).toFixed(2)}%` : '')}
             />
             <Legend />
             <Line type="monotone" dataKey="immortalAPY" stroke="#8b5cf6" strokeWidth={2} name="Immortal APY" />
