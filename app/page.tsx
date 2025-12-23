@@ -1,92 +1,130 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
-  TrendingUp,
   Lock,
+  Flame,
+  Target,
+  BarChart3,
   Shield,
   Zap,
-  Target,
-  DollarSign,
-  Flame,
-  Activity,
-  ArrowRight,
-  CheckCircle,
   Users,
-  BarChart3,
 } from 'lucide-react';
 
 export default function LandingPage() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const features = [
     {
       icon: Lock,
       title: 'Zero-Liquidation Borrowing',
-      description: 'Borrow USDC at 5.5% fixed APR with 180% collateral ratio. Auto-repay protects your position.',
-      gradient: 'from-violet-500 to-purple-600',
+      description: 'Borrow USDC at competitive fixed APR with automated protections.',
+      gradient: 'from-violet-500 to-pink-500',
     },
     {
       icon: Flame,
       title: 'Immortal Reserve',
-      description: 'Burn VEIL for permanent shares. Earn 12-25% APY in monthly USDC dividends.',
-      gradient: 'from-pink-500 to-rose-600',
+      description: 'Permanent token burn and monthly USDC dividends for holders.',
+      gradient: 'from-pink-500 to-rose-500',
     },
     {
       icon: Target,
-      title: 'Immortal Vaults',
-      description: 'Auto-compounding strategies with 60% performance fee burn. Set it and forget it.',
-      gradient: 'from-orange-500 to-red-600',
+      title: 'Auto Vaults',
+      description: 'Auto-compounding vaults with dynamic rebalancing.',
+      gradient: 'from-orange-400 to-red-500',
     },
     {
       icon: BarChart3,
-      title: 'Perpetual Trading',
-      description: 'Trade BTC, ETH, and more with up to 50x leverage. 5bps fees, confidential orders.',
-      gradient: 'from-blue-500 to-cyan-600',
+      title: 'Perps Trading',
+      description: 'Low-fee perpetuals with confidential order routing.',
+      gradient: 'from-blue-500 to-cyan-500',
     },
     {
       icon: Shield,
       title: 'Advanced Lending',
-      description: 'Fixed/variable rates, P2P matching, and auto-optimizer for best yields.',
-      gradient: 'from-green-500 to-emerald-600',
+      description: 'Flexible collateral, fixed/variable lending markets.',
+      gradient: 'from-green-400 to-emerald-500',
     },
     {
       icon: Zap,
       title: 'Dual Restaking',
-      description: 'Earn on both EigenLayer and Symbiotic with flexible collateral options.',
-      gradient: 'from-yellow-500 to-amber-600',
+      description: 'Stack rewards across protocols for maximized yield.',
+      gradient: 'from-yellow-400 to-amber-500',
+    },
+    {
+      icon: Users,
+      title: 'Encrypted Governance',
+      description: 'Private voting primitives for confidential governance.',
+      gradient: 'from-violet-600 to-indigo-500',
     },
   ];
 
   const stats = [
-    { label: 'Total Value Locked', value: '$987.5M', change: '+12.3%' },
-    { label: 'Monthly Revenue', value: '$4.2M', change: '+8.7%' },
-    { label: 'Tokens Burned', value: '120M VEIL', change: '+2.1M' },
-    { label: 'Active Users', value: '14,523', change: '+432' },
-  ];
-
-  const tokenomics = [
-    { metric: 'Fixed Borrow Rate', value: '5.5% APR' },
-    { metric: 'Immortal Yield', value: '12-25% APR' },
-    { metric: 'veVEIL Max Boost', value: '2.5x' },
-    { metric: 'Vault Fee Burn', value: '60%' },
-    { metric: 'Total Supply', value: '1B VEIL' },
-    { metric: 'Circulating', value: '580M' },
+    { label: 'TVL', value: '$3.24B' },
+    { label: 'Annual Revenue', value: '$412M' },
+    { label: 'Circulating', value: '180M VEIL' },
+    { label: 'Your Dividend', value: 'Connect to view' },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/20 via-transparent to-transparent" />
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage: `radial-gradient(circle at ${50 + scrollY * 0.05}% ${50 + scrollY * 0.03}%, rgba(139, 92, 246,
+    <div className="min-h-screen bg-[#0f0f1a] text-gray-100">
+      <header className="py-6 px-6 max-w-7xl mx-auto flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center font-bold text-black">V</div>
+          <div className="font-semibold text-lg">Veil Hub</div>
+        </div>
+        <div>
+          <button className="px-4 py-2 rounded-md bg-gradient-to-r from-violet-500 to-pink-500 text-black font-medium">Connect Wallet</button>
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-6">
+        <section className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#05030a] via-[#12021a] to-[#000] p-12 mt-6">
+          <div className="absolute -inset-20 opacity-30 blur-3xl" style={{ background: 'radial-gradient(circle at 20% 30%, rgba(139,92,246,0.25), transparent 15%), radial-gradient(circle at 80% 70%, rgba(236,72,153,0.18), transparent 20%)' }} />
+          <div className="relative z-10 text-center">
+            <h1 className="text-4xl md:text-6xl font-extrabold">Veil Hub: The Final DeFi Organism</h1>
+            <p className="mt-4 text-gray-300 max-w-3xl mx-auto">Real monthly USDC dividends. Permanent token burn. Privacy-protected everything. One dApp to rule DeFi.</p>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button className="px-6 py-3 rounded-md bg-gradient-to-r from-violet-500 to-pink-500 text-black font-semibold">Connect Wallet</button>
+              <button className="px-6 py-3 rounded-md border border-gray-700 text-gray-100">Lock VEIL &amp; Boost Yield</button>
+            </div>
+          </div>
+        </section>
+
+        <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+          {stats.map((s) => (
+            <div key={s.label} className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
+              <div className="text-sm text-gray-400">{s.label}</div>
+              <div className="mt-2 text-2xl font-semibold">{s.value}</div>
+            </div>
+          ))}
+        </section>
+
+        <section className="mt-12">
+          <h2 className="text-2xl font-semibold">Features</h2>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {features.map((f) => {
+              const Icon = f.icon;
+              return (
+                <div key={f.title} className="bg-gray-900/40 p-4 rounded-lg border border-gray-800 flex gap-3 items-start">
+                  <div className="p-2 rounded-md bg-gradient-to-br from-violet-600 to-pink-500 text-black"><Icon /></div>
+                  <div>
+                    <div className="font-semibold">{f.title}</div>
+                    <div className="text-sm text-gray-400">{f.description}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="mt-12 mb-20">
+          <h2 className="text-2xl font-semibold">How It Works</h2>
+          <div className="mt-6 bg-gray-900/50 p-6 rounded-lg border border-gray-800 text-center">
+            <div className="text-lg font-medium">Revenue → Dividends + Burn → Scarcity → Higher Yields → More TVL</div>
+            <div className="mt-4 text-sm text-gray-400">(Animated flywheel placeholder)</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
