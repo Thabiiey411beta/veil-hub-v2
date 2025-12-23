@@ -133,7 +133,7 @@ const VaultManager = () => {
     ];
   };
 
-  const getRiskColor = (risk) => {
+  const getRiskColor = (risk: any) => {
     switch(risk) {
       case 'low': return 'text-green-400 bg-green-500/20';
       case 'medium': return 'text-yellow-400 bg-yellow-500/20';
@@ -142,7 +142,7 @@ const VaultManager = () => {
     }
   };
 
-  const getRiskBorderColor = (risk) => {
+  const getRiskBorderColor = (risk: any) => {
     switch(risk) {
       case 'low': return 'border-green-500/50';
       case 'medium': return 'border-yellow-500/50';
