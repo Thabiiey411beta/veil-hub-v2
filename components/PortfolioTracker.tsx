@@ -389,7 +389,7 @@ const PortfolioTracker = () => {
                 <YAxis stroke="#64748b" />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                  formatter={(value) => `$${value.toFixed(0)}`}
+                  formatter={(value: any) => (value != null ? `$${Number(value).toFixed(0)}` : '')}
                 />
                 <Legend />
                 <Bar dataKey="veVEIL" stackId="a" fill="#8b5cf6" radius={[0, 0, 0, 0]} />
