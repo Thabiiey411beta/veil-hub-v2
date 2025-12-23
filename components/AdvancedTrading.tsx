@@ -351,7 +351,7 @@ const AdvancedTradingInterface = () => {
               <div className="bg-slate-800/50 rounded-lg p-3 mb-4 space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Entry Price</span>
-                  <span className="font-bold">${orderType === 'market' ? currentPair.price.toFixed(2) : (price || currentPair.price).toFixed(2)}</span>
+                  <span className="font-bold">${orderType === 'market' ? currentPair.price.toFixed(2) : (price ? Number(price).toFixed(2) : currentPair.price.toFixed(2))}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Liquidation</span>
