@@ -1,5 +1,5 @@
 import { createConfig, http } from "wagmi";
-import { connectkit } from "connectkit";
+import connectkit from "connectkit";
 import { defineChain } from "viem";
 
 export const supraMainnet = defineChain({
@@ -20,7 +20,7 @@ export const supraTestnet = defineChain({
 });
 
 export const config = createConfig(
-  connectkit({
+  (connectkit as any)({
     chains: [supraTestnet, supraMainnet],
     transports: {
       [supraMainnet.id]: http("https://rpc.supra.com", { 
@@ -38,5 +38,5 @@ export const config = createConfig(
     appName: "Veil Hub",
     ssr: true,
     pollingInterval: 12000,
-  })
+  }) as any
 );
