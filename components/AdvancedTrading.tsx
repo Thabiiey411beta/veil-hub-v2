@@ -223,7 +223,7 @@ const AdvancedTradingInterface = () => {
                   <YAxis stroke="#64748b" domain={['dataMin - 500', 'dataMax + 500']} />
                   <Tooltip 
                     contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                    formatter={(value) => [`$${value.toFixed(2)}`, 'Price']}
+                    formatter={(value: any) => (value != null ? [`$${Number(value).toFixed(2)}`, 'Price'] : ['', 'Price'])}
                   />
                   <Area type="monotone" dataKey="price" stroke="#8b5cf6" fill="url(#priceGradient)" strokeWidth={2} />
                 </AreaChart>
