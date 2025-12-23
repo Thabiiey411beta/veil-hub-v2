@@ -11,7 +11,7 @@ declare module 'supra-l1-sdk' {
 		static init(url: string): Promise<SupraClient>;
 		getAccountSupraCoinBalance(address: string): Promise<bigint>;
 		sendTx(account: SupraAccount, payload: any): Promise<any>;
-		sendTxAndWaitForResponse?(account: SupraAccount, payload: any): Promise<any>;
+		sendTxAndWaitForResponse(account: SupraAccount, payload: any): Promise<any>;
 	}
 
 	export { SupraClient };
