@@ -3,12 +3,12 @@ import { LineChart, Line, AreaChart, Area, BarChart, Bar, ResponsiveContainer, X
 import { Target, TrendingUp, Shield, Zap, DollarSign, Percent, Activity, AlertTriangle, Clock, Layers, ArrowUpRight, ArrowDownRight, Info, ChevronDown } from 'lucide-react';
 
 const VaultManager = () => {
-  const [selectedVault, setSelectedVault] = useState(null);
+  const [selectedVault, setSelectedVault] = useState<any | null>(null);
   const [depositAmount, setDepositAmount] = useState('');
   const [filterRisk, setFilterRisk] = useState('all');
 
   // Vault Data
-  const vaults = [
+  const vaults: any[] = [
     {
       id: 1,
       name: 'BTC/ETH Alpha',
