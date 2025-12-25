@@ -4,6 +4,8 @@ import { useAccount, useReadContract } from 'wagmi'
 import { CONTRACTS, VEIL_TOKEN_ABI, IMMORTAL_RESERVE_ABI } from '@/lib/contracts'
 import { formatEther } from 'viem'
 
+export const dynamic = 'force-dynamic'
+
 export default function Protocol() {
   const { address } = useAccount()
   

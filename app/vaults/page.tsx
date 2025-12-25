@@ -7,6 +7,8 @@ import { CONTRACTS, VEIL_TOKEN_ABI, IMMORTAL_RESERVE_ABI } from '@/lib/contracts
 import TechnicalIndicators from '@/components/TechnicalIndicators'
 import toast from 'react-hot-toast'
 
+export const dynamic = 'force-dynamic'
+
 export default function Vaults() {
   const { address } = useAccount()
   const [burnAmount, setBurnAmount] = useState('')

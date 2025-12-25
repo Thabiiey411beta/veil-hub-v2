@@ -6,6 +6,8 @@ import { parseEther, formatEther } from 'viem'
 import { CONTRACTS, VEIL_TOKEN_ABI, VEVEIL_ABI } from '@/lib/contracts'
 import toast from 'react-hot-toast'
 
+export const dynamic = 'force-dynamic'
+
 export default function Governance() {
   const { address } = useAccount()
   const [lockAmount, setLockAmount] = useState('')

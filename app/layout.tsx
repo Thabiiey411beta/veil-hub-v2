@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Home, BarChart3, Target, Lock, Vote, Book, Menu, X, Bell, Settings, User, LogOut, ChevronDown, Wallet } from 'lucide-react';
+import { Providers } from './providers';
 
 export default function RootLayout({
   children,
@@ -30,6 +31,7 @@ export default function RootLayout({
         <meta name="description" content="Zero-liquidation borrowing, perpetual USDC dividends, and privacy-first DeFi on Supra L1" />
       </head>
       <body className="bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white">
+        <Providers>
         {/* Top Navigation Bar */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -161,6 +163,7 @@ export default function RootLayout({
 
         {/* Toast Container */}
         <div className="fixed bottom-4 right-4 z-50 space-y-2" />
+        </Providers>
       </body>
     </html>
   );
