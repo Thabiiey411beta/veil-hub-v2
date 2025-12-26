@@ -3,8 +3,8 @@
   "version": "14.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start"
   },
   "dependencies": {
@@ -17,10 +17,10 @@
     "ethers": "^6.16.0",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.363.0",
-    "next": "14.2.5",
+    "next": "^16.1.1",
     "postcss": "^8",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-hot-toast": "^2.4.1",
     "recharts": "^3.6.0",
     "supra-l1-sdk": "^4.6.0",
