@@ -1,9 +1,9 @@
-# 🌑 Veil Hub v14 - The Final DeFi Organism
+# 🌑 Veil Hub v17 - The Final DeFi Organism
 
 > **Zero-liquidation borrowing. Perpetual real yield. Privacy-first. Built on Supra L1.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Solidity](https://img.shields.io/badge/Solidity-0.8.24-blue)](https://soliditylang.org/)
+[![Move](https://img.shields.io/badge/Move-1.0-blue)](https://move-lang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2.5-black)](https://nextjs.org/)
 [![Supra L1](https://img.shields.io/badge/Supra%20L1-Testnet-purple)](https://supra.com)
 
@@ -12,9 +12,11 @@
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Core Thesis](#core-thesis)
 - [Features](#features)
 - [Architecture](#architecture)
 - [Tokenomics](#tokenomics)
+- [Smart Contracts](#smart-contracts)
 - [Getting Started](#getting-started)
 - [Deployment](#deployment)
 - [Documentation](#documentation)
@@ -25,14 +27,16 @@
 
 ## 🌌 Overview
 
-Veil Hub v14 is a next-generation DeFi protocol built on Supra L1 that combines:
+Veil Hub v17 is a next-generation DeFi protocol built on Supra L1 that combines:
 
 - **Zero-liquidation borrowing** at 5.5% fixed APR
 - **Perpetual USDC yield** (12-25% APR) for Immortal Share holders
-- **veVEIL governance** with up to 2.5x yield boost
-- **Automated buyback & burn** mechanism
+- **veVEIL governance** with up to 2.5x yield boost (tokenized as composable NFTs)
+- **Automated buyback & burn** mechanism with permanent 100M floor
 - **ERC-4626 vaults** with 60% performance fee burn
 - **Supra AutoFi** integration for autonomous operations
+- **Encrypted intents** for privacy via Supra confidential computing
+- **Black-hole flywheel**: Real revenue → Dividends + Burns → Scarcity → Higher yields
 
 ### Key Metrics
 
@@ -44,6 +48,23 @@ Veil Hub v14 is a next-generation DeFi protocol built on Supra L1 that combines:
 | Max veVEIL Boost | **2.5x** |
 | Vault Burn Rate | **60%** |
 | Total Supply | **1B $VEIL** |
+| Burn Floor | **100M $VEIL** |
+
+---
+
+## 🔥 Core Thesis
+
+Veil Hub operates as a **black-hole flywheel** on Supra L1, where all protocol revenue fuels perpetual scarcity and yields:
+
+- **Pre-floor (supply > 100M)**: 10% USDC dividends, 50% VEIL burn, 30% veVEIL boosts, 10% treasury
+- **Post-floor (supply ≤ 100M)**: 20% USDC dividends, 60% veVEIL rewards, 20% treasury (burn stops to preserve floor)
+- **Privacy**: Encrypted LP VACUUM and MEV capture using Supra confidential execution
+- **Real Revenue**: No emissions, all yields from trading fees, interest, MEV
+- **Supra Native**: DORA oracles, dVRF, AutoFi automation, HyperNova bridges
+
+Inspiration: OlympusDAO's treasury mechanics + Pendle's yield tokenization + Morpho's P2P lending + EigenLayer restaking + Lifinity's tokenized locks.
+
+Flywheel: Revenue burns create scarcity → Token value rises → More revenue → More burns/dividends.
 
 ---
 
@@ -106,27 +127,77 @@ Veil Hub v14 is a next-generation DeFi protocol built on Supra L1 that combines:
 
 ---
 
+## 📜 Smart Contracts
+
+Veil Hub is implemented as Move modules on Supra L1 for security and efficiency.
+
+### Core Modules
+
+| Module | Description | Status |
+|--------|-------------|--------|
+| `veil_token.move` | VEIL token with mint/burn, 100M floor enforcement | ✅ Implemented |
+| `immortal_reserve.move` | Revenue splitter, buyback & burn logic, floor mechanics | ✅ Implemented |
+| `veveil.move` | Tokenized veVEIL NFTs, decay-to-burn, composable locks | 🚧 In Progress |
+| `debt_engine.move` | Zero-liquidation borrowing, safe buffers | 🚧 In Progress |
+| `perpetual_dex.move` | Perps with funding rates, circuit breaker | 🚧 In Progress |
+| `phantom_lender.move` | Morpho-style optimizer, P2P matching, isolated markets | 🚧 In Progress |
+| `immortal_vaults.move` | Auto-compounding CL vaults, iToken minting | 🚧 In Progress |
+| `phantom_yield_spectrum.move` | Pendle + Spectra yield tokenization | 🚧 In Progress |
+| `phantom_restaker.move` | EigenLayer-style LST restaking | 🚧 In Progress |
+| `phantom_symbiote.move` | Symbiotic flexible collateral restaking | 🚧 In Progress |
+| `confidential_pmm.move` | Concentrated liquidity with encrypted ranges | 🚧 In Progress |
+| `lp_vacuum.move` | Encrypted intent router | 🚧 In Progress |
+| `mev_vacuum.move` | Encrypted bundle priority + capture split | 🚧 In Progress |
+| `dark_gauges.move` | Encrypted bribe/gauges (ve(3,3) style) | 🚧 In Progress |
+| `treasury.move` | Multi-sig + Insurance Fund + circuit breakers | 🚧 In Progress |
+| `governance.move` | Timelock governance, 48h delays | 🚧 In Progress |
+
+### Key Implementations
+
+#### VEIL Token (`veil_token.move`)
+- **Supply Control**: 1B initial, burns to 100M floor
+- **Minting**: Restricted to `immortal_reserve` for buybacks
+- **Burning**: Via `veveil` decay and revenue burns
+- **Safety**: No reentrancy, supply caps enforced
+
+#### Immortal Reserve (`immortal_reserve.move`)
+- **Floor Mechanics**: Pre/post-floor distribution splits
+- **Revenue Streams**: Trading fees, interest, MEV
+- **Distribution**: USDC dividends, VEIL burns, veVEIL boosts, treasury
+- **Governance**: Pause/unpause with timelock
+
+#### Supra Integrations
+- **DORA Oracles**: Price feeds for all assets
+- **dVRF**: Randomness for strategy selection
+- **AutoFi**: Autonomous harvesting and repayments
+- **Confidential Execution**: Encrypted intents for privacy
+
+---
+
 ## 🏗️ Architecture
 
 ### Smart Contract Structure
 
 ```
-src/
-├── core/
-│   ├── VeilHub.sol              # Main coordinator
-│   ├── DebtEngine.sol           # Borrowing logic
-│   ├── ImmortalReserve.sol      # Dividend distribution
-│   ├── VeilVault.sol            # ERC-4626 vaults
-│   ├── VaultFactory.sol         # Vault creation
-│   ├── BuybackEngine.sol        # Automated buyback
-│   ├── TokenDistribution.sol    # Vesting schedules
-│   ├── SupraOracle.sol          # Price feeds
-│   ├── SupraVRF.sol             # Randomness
-│   └── AccessControl.sol        # Role management
-├── tokens/
-│   ├── VeilToken.sol            # $VEIL ERC20
-│   └── VeVEIL.sol               # Vote-escrowed VEIL
-├── security/
+move/sources/
+├── veil_token.move              # VEIL token with supply controls
+├── immortal_reserve.move        # Revenue splitter & burn logic
+├── veveil.move                  # Tokenized veVEIL NFTs
+├── debt_engine.move             # Zero-liquidation borrowing
+├── perpetual_dex.move           # Perps with funding rates
+├── phantom_lender.move          # P2P lending optimizer
+├── immortal_vaults.move         # Auto-compounding vaults
+├── phantom_yield_spectrum.move  # Yield tokenization
+├── phantom_restaker.move        # LST restaking
+├── phantom_symbiote.move        # Flexible collateral restaking
+├── confidential_pmm.move        # Encrypted CL liquidity
+├── lp_vacuum.move               # Intent router
+├── mev_vacuum.move              # MEV capture
+├── dark_gauges.move             # Encrypted gauges
+├── treasury.move                # Multi-sig treasury
+├── governance.move              # Timelock governance
+└── Move.toml                    # Package config
+```
 │   ├── CircuitBreaker.sol       # Emergency halt
 │   └── RateLimiter.sol          # Flash loan protection
 ├── interfaces/
