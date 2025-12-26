@@ -223,7 +223,7 @@ const AdvancedTradingInterface = () => {
                   <YAxis stroke="#64748b" domain={['dataMin - 500', 'dataMax + 500']} />
                   <Tooltip 
                     contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                    formatter={(value) => [`$${value.toFixed(2)}`, 'Price']}
+                    formatter={(value: any) => (value != null ? [`$${Number(value).toFixed(2)}`, 'Price'] : ['', 'Price'])}
                   />
                   <Area type="monotone" dataKey="price" stroke="#8b5cf6" fill="url(#priceGradient)" strokeWidth={2} />
                 </AreaChart>
@@ -351,7 +351,7 @@ const AdvancedTradingInterface = () => {
               <div className="bg-slate-800/50 rounded-lg p-3 mb-4 space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Entry Price</span>
-                  <span className="font-bold">${orderType === 'market' ? currentPair.price.toFixed(2) : (price || currentPair.price).toFixed(2)}</span>
+                  <span className="font-bold">${orderType === 'market' ? currentPair.price.toFixed(2) : (price ? Number(price).toFixed(2) : currentPair.price.toFixed(2))}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Liquidation</span>

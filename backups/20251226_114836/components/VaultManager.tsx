@@ -3,12 +3,12 @@ import { LineChart, Line, AreaChart, Area, BarChart, Bar, ResponsiveContainer, X
 import { Target, TrendingUp, Shield, Zap, DollarSign, Percent, Activity, AlertTriangle, Clock, Layers, ArrowUpRight, ArrowDownRight, Info, ChevronDown } from 'lucide-react';
 
 const VaultManager = () => {
-  const [selectedVault, setSelectedVault] = useState(null);
+  const [selectedVault, setSelectedVault] = useState<any | null>(null);
   const [depositAmount, setDepositAmount] = useState('');
   const [filterRisk, setFilterRisk] = useState('all');
 
   // Vault Data
-  const vaults = [
+  const vaults: any[] = [
     {
       id: 1,
       name: 'BTC/ETH Alpha',
@@ -121,7 +121,7 @@ const VaultManager = () => {
   };
 
   // Risk metrics for selected vault
-  const generateRiskMetrics = (vault) => {
+  const generateRiskMetrics = (vault: any) => {
     if (!vault) return [];
     return [
       { metric: 'Volatility', value: vault.risk === 'low' ? 45 : vault.risk === 'medium' ? 65 : 85 },
@@ -133,7 +133,7 @@ const VaultManager = () => {
     ];
   };
 
-  const getRiskColor = (risk) => {
+  const getRiskColor = (risk: any) => {
     switch(risk) {
       case 'low': return 'text-green-400 bg-green-500/20';
       case 'medium': return 'text-yellow-400 bg-yellow-500/20';
@@ -142,7 +142,7 @@ const VaultManager = () => {
     }
   };
 
-  const getRiskBorderColor = (risk) => {
+  const getRiskBorderColor = (risk: any) => {
     switch(risk) {
       case 'low': return 'border-green-500/50';
       case 'medium': return 'border-yellow-500/50';
@@ -326,9 +326,9 @@ const VaultManager = () => {
                             <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                             <XAxis dataKey="day" stroke="#64748b" />
                             <YAxis stroke="#64748b" domain={[85, 125]} />
-                            <Tooltip 
+                            <Tooltip
                               contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '8px' }}
-                              formatter={(value) => `${value.toFixed(2)}%`}
+                              formatter={(value: any) => (value != null ? `${Number(value).toFixed(2)}%` : '')}
                             />
                             <Area type="monotone" dataKey="value" stroke="#8b5cf6" fill="url(#vaultPerf)" strokeWidth={2} name="Vault" />
                             <Line type="monotone" dataKey="benchmark" stroke="#64748b" strokeWidth={1} strokeDasharray="5 5" name="Benchmark" />
@@ -355,16 +355,16 @@ const VaultManager = () => {
                       <div>
                         <h4 className="text-lg font-bold mb-4">Asset Allocation</h4>
                         <div className="space-y-3">
-                          {Object.entries(vault.allocation).map(([asset, percent]) => (
+                          {Object.entries(vault.allocation).map(([asset, percent]: [string, any]) => (
                             <div key={asset}>
                               <div className="flex justify-between text-sm mb-1">
                                 <span className="text-slate-400">{asset}</span>
-                                <span className="font-bold">{percent}%</span>
+                                <span className="font-bold">{Number(percent)}%</span>
                               </div>
                               <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
                                 <div 
                                   className="h-full bg-gradient-to-r from-violet-500 to-pink-500"
-                                  style={{ width: `${percent}%` }}
+                                  style={{ width: `${Number(percent)}%` }}
                                 />
                               </div>
                             </div>
