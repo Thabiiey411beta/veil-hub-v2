@@ -1,9 +1,12 @@
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
+module.exports = {
   images: {
-    domains: ['veil-hub-v2.vercel.app'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-}
-
-module.exports = nextConfig
+  // Remove any 'swcMinify: true/false' line entirely (it's default and removed in Next 16)
+  // Your other config if any...
+};
