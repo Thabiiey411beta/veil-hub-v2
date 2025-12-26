@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 'use client';
 
 import React, { useState } from 'react';
@@ -21,15 +22,19 @@ export default function RootLayout({
     { name: 'Governance', href: '/governance', icon: Vote },
     { name: 'Docs', href: '/docs', icon: Book },
   ];
+=======
+import React from 'react'
+>>>>>>> Stashed changes
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Veil Hub - The Final DeFi Organism</title>
-        <meta name="description" content="Zero-liquidation borrowing, perpetual USDC dividends, and privacy-first DeFi on Supra L1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
       </head>
+<<<<<<< Updated upstream
       <body className="bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white">
         <Providers>
         {/* Top Navigation Bar */}
@@ -131,28 +136,39 @@ export default function RootLayout({
                 )}
               </div>
             </div>
+=======
+      <body className="font-sans bg-[#0f0f1a] text-gray-100 antialiased min-h-screen flex flex-col">
+        <header className="w-full py-4 px-6 md:px-12 flex items-center justify-between border-b border-gray-900">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center font-bold text-black">V</div>
+            <span className="text-lg font-semibold">Veil Hub</span>
+>>>>>>> Stashed changes
           </div>
 
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="lg:hidden border-t border-slate-800 bg-slate-950">
-              <div className="px-4 py-4 space-y-1">
-                {navigation.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-all"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <Icon className="w-5 h-5" />
-                      {item.name}
-                    </a>
-                  );
-                })}
-              </div>
+          <nav className="hidden md:flex gap-6 items-center">
+            <a href="#" className="text-sm text-gray-300 hover:text-white">Docs</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white">Whitepaper</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white">Discord</a>
+            <a href="#" className="text-sm text-gray-300 hover:text-white">X</a>
+          </nav>
+
+          <div className="ml-auto">
+            <button className="px-4 py-2 rounded-md bg-gradient-to-r from-violet-500 to-pink-500 text-black font-medium shadow-lg">Connect Wallet</button>
+          </div>
+        </header>
+
+        <main className="flex-grow">{children}</main>
+
+        <footer className="w-full border-t border-gray-900 py-6 px-6 md:px-12">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-sm text-gray-400">© {new Date().getFullYear()} Veil Hub</div>
+            <div className="flex gap-4">
+              <a href="#" className="text-sm text-gray-300 hover:text-white">Docs</a>
+              <a href="#" className="text-sm text-gray-300 hover:text-white">Whitepaper</a>
+              <a href="#" className="text-sm text-gray-300 hover:text-white">Discord</a>
+              <a href="#" className="text-sm text-gray-300 hover:text-white">X</a>
             </div>
+<<<<<<< Updated upstream
           )}
         </nav>
 
@@ -164,7 +180,11 @@ export default function RootLayout({
         {/* Toast Container */}
         <div className="fixed bottom-4 right-4 z-50 space-y-2" />
         </Providers>
+=======
+          </div>
+        </footer>
+>>>>>>> Stashed changes
       </body>
     </html>
-  );
+  )
 }
