@@ -1,12 +1,7 @@
-module.exports = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
-  },
-  // Remove any 'swcMinify: true/false' line entirely (it's default and removed in Next 16)
-  // Your other config if any...
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // No need for experimental.turbopack: false in Next.js 16
+  // We'll force Webpack via script flag instead (see below)
 };
+
+module.exports = nextConfig;
