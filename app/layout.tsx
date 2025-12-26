@@ -1,6 +1,6 @@
-# Look for <<<<<<< HEAD, =======, >>>>>>> markers
-# Keep the desired code (likely the incoming changes for Providers)<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+# Look for <<<<<<< HEAD, markers
+# Keep the desired code (likely the incoming changes for Providers) Updated upstream
+ Updated upstream
 'use client';
 
 import React, { useState } from 'react';
@@ -24,23 +24,23 @@ export default function RootLayout({
     { name: 'Governance', href: '/governance', icon: Vote },
     { name: 'Docs', href: '/docs', icon: Book },
   ];
-=======
+
 import React from 'react'
->>>>>>> Stashed changes
-=======
+ Stashed changes
+
 import React from 'react'
->>>>>>> Stashed changes
+ Stashed changes
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark"><html lang="en" className="light">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
       </head>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+ Updated upstream
+ Updated upstream
       <body className="bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white">
         <Providers>
         {/* Top Navigation Bar */}
@@ -142,18 +142,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 )}
               </div>
             </div>
-=======
-=======
->>>>>>> Stashed changes
+
+
+ Stashed changes
       <body className="font-sans bg-[#0f0f1a] text-gray-100 antialiased min-h-screen flex flex-col">
         <header className="w-full py-4 px-6 md:px-12 flex items-center justify-between border-b border-gray-900">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center font-bold text-black">V</div>
             <span className="text-lg font-semibold">Veil Hub</span>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+ Updated upstream
+ Stashed changes
+
+ Stashed changes
           </div>
 
           <nav className="hidden md:flex gap-6 items-center">
@@ -179,8 +179,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="#" className="text-sm text-gray-300 hover:text-white">Discord</a>
               <a href="#" className="text-sm text-gray-300 hover:text-white">X</a>
             </div>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+ Updated upstream
+ Updated upstream
           )}
         </nav>
 
