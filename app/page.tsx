@@ -1,3 +1,4 @@
+# Resolve conflicts similarly<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 "use client";
 
@@ -69,6 +70,12 @@ export default function LandingPage() {
 import React from 'react'
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
+=======
+"use client"
+import React from 'react'
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
+
+>>>>>>> Stashed changes
 const sampleData = [
   { t: 'Jan', v: 800 },
   { t: 'Feb', v: 920 },
@@ -78,6 +85,7 @@ const sampleData = [
   { t: 'Jun', v: 1050 },
   { t: 'Jul', v: 1200 },
 ]
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 
 export default function Page() {
@@ -146,6 +154,11 @@ export default function Page() {
     </div>
   );
 =======
+=======
+
+export default function Page() {
+  return (
+>>>>>>> Stashed changes
     <div className="min-h-screen">
       <section className="relative h-screen flex items-center">
         <div className="absolute inset-0 -z-10">
@@ -246,5 +259,8 @@ export default function Page() {
       </section>
     </div>
   )
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
