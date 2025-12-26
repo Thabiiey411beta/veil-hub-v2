@@ -1,6 +1,3 @@
-# Look for <<<<<<< HEAD, markers
-# Keep the desired code (likely the incoming changes for Providers) Updated upstream
- Updated upstream
 'use client';
 
 import React, { useState } from 'react';
@@ -192,15 +189,61 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Toast Container */}
         <div className="fixed bottom-4 right-4 z-50 space-y-2" />
         </Providers>
-=======
+
           </div>
         </footer>
->>>>>>> Stashed changes
-=======
+
           </div>
         </footer>
->>>>>>> Stashed changes
+
       </body>
     </html>
   )
+}
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'Veil Hub - The Final DeFi Organism',
+  description: 'Zero-liquidation borrowing, perpetual USDC dividends, and privacy-first DeFi on Supra L1',
+  keywords: ['DeFi', 'Supra L1', 'veVEIL', 'Borrowing', 'Yield', 'Privacy'],
+  authors: [{ name: 'Veil Hub Team' }],
+  openGraph: {
+    title: 'Veil Hub - The Final DeFi Organism',
+    description: 'Real monthly USDC dividends. Permanent token burn. Privacy-protected everything.',
+    url: 'https://veilhub.xyz',
+    siteName: 'Veil Hub',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Veil Hub - The Final DeFi Organism',
+    description: 'Real monthly USDC dividends. Permanent token burn. Privacy-protected everything.',
+    images: ['/og-image.png'],
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className="dark">
+      <body className={`${inter.className} antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
 }

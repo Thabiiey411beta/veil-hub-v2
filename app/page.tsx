@@ -1,265 +1,319 @@
-# Resolve conflicts similarly Updated upstream
- Updated upstream
-"use client";
+'use client';
 
-import React from 'react';
-import {
-  Lock,
-  Flame,
-  Target,
-  BarChart3,
-  Shield,
-  Zap,
-  Users,
-} from 'lucide-react';
+import React, { useState } from 'react';
+import Link from 'next/link';
 
-export default function LandingPage() {
-  const features = [
-    {
-      icon: Lock,
-      title: 'Zero-Liquidation Borrowing',
-      description: 'Borrow USDC at competitive fixed APR with automated protections.',
-      gradient: 'from-violet-500 to-pink-500',
-    },
-    {
-      icon: Flame,
-      title: 'Immortal Reserve',
-      description: 'Permanent token burn and monthly USDC dividends for holders.',
-      gradient: 'from-pink-500 to-rose-500',
-    },
-    {
-      icon: Target,
-      title: 'Auto Vaults',
-      description: 'Auto-compounding vaults with dynamic rebalancing.',
-      gradient: 'from-orange-400 to-red-500',
-    },
-    {
-      icon: BarChart3,
-      title: 'Perps Trading',
-      description: 'Low-fee perpetuals with confidential order routing.',
-      gradient: 'from-blue-500 to-cyan-500',
-    },
-    {
-      icon: Shield,
-      title: 'Advanced Lending',
-      description: 'Flexible collateral, fixed/variable lending markets.',
-      gradient: 'from-green-400 to-emerald-500',
-    },
-    {
-      icon: Zap,
-      title: 'Dual Restaking',
-      description: 'Stack rewards across protocols for maximized yield.',
-      gradient: 'from-yellow-400 to-amber-500',
-    },
-    {
-      icon: Users,
-      title: 'Encrypted Governance',
-      description: 'Private voting primitives for confidential governance.',
-      gradient: 'from-violet-600 to-indigo-500',
-    },
+export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+
+  const navigation = [
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Trade', href: '/trade' },
+    { name: 'Vaults', href: '/vaults' },
+    { name: 'Borrow', href: '/borrow' },
+    { name: 'Governance', href: '/governance' },
+    { name: 'Docs', href: '/docs' },
   ];
 
   const stats = [
     { label: 'TVL', value: '$3.24B' },
     { label: 'Annual Revenue', value: '$412M' },
     { label: 'Circulating', value: '180M VEIL' },
-    { label: 'Your Dividend', value: 'Connect to view' },
+    { label: 'Your Dividend', value: isConnected ? '$0.00' : 'Connect to view' },
   ];
-=======
-"use client"
-import React from 'react'
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
+  const features = [
+    {
+      title: 'Zero-Liquidation Borrowing',
+      description: 'Borrow USDC at competitive fixed APR with automated protections.',
+    },
+    {
+      title: 'Immortal Reserve',
+      description: 'Permanent token burn and monthly USDC dividends for holders.',
+    },
+    {
+      title: 'Auto Vaults',
+      description: 'Auto-compounding vaults with dynamic rebalancing.',
+    },
+    {
+      title: 'Perps Trading',
+      description: 'Low-fee perpetuals with confidential order routing.',
+    },
+    {
+      title: 'Advanced Lending',
+      description: 'Flexible collateral, fixed/variable lending markets.',
+    },
+    {
+      title: 'Dual Restaking',
+      description: 'Stack rewards across protocols for maximized yield.',
+    },
+    {
+      title: 'Encrypted Governance',
+      description: 'Private voting primitives for confidential governance.',
+    },
+  ];
 
-"use client"
-import React from 'react'
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-
- Stashed changes
-const sampleData = [
-  { t: 'Jan', v: 800 },
-  { t: 'Feb', v: 920 },
-  { t: 'Mar', v: 860 },
-  { t: 'Apr', v: 980 },
-  { t: 'May', v: 1100 },
-  { t: 'Jun', v: 1050 },
-  { t: 'Jul', v: 1200 },
-]
- Updated upstream
- Stashed changes
-
-export default function Page() {
   return (
- Updated upstream
-    <div className="min-h-screen bg-[#0f0f1a] text-gray-100">
-      <header className="py-6 px-6 max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center font-bold text-black">V</div>
-          <div className="font-semibold text-lg">Veil Hub</div>
-        </div>
-        <div>
-          <button className="px-4 py-2 rounded-md bg-gradient-to-r from-violet-500 to-pink-500 text-black font-medium">Connect Wallet</button>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-6">
-        <section className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#05030a] via-[#12021a] to-[#000] p-12 mt-6">
-          <div className="absolute -inset-20 opacity-30 blur-3xl" style={{ background: 'radial-gradient(circle at 20% 30%, rgba(139,92,246,0.25), transparent 15%), radial-gradient(circle at 80% 70%, rgba(236,72,153,0.18), transparent 20%)' }} />
-          <div className="relative z-10 text-center">
-            <h1 className="text-4xl md:text-6xl font-extrabold">Veil Hub: The Final DeFi Organism</h1>
-            <p className="mt-4 text-gray-300 max-w-3xl mx-auto">Real monthly USDC dividends. Permanent token burn. Privacy-protected everything. One dApp to rule DeFi.</p>
-
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button className="px-6 py-3 rounded-md bg-gradient-to-r from-violet-500 to-pink-500 text-black font-semibold">Connect Wallet</button>
-              <button className="px-6 py-3 rounded-md border border-gray-700 text-gray-100">Lock VEIL &amp; Boost Yield</button>
-            </div>
-          </div>
-        </section>
-
-        <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <div className="text-sm text-gray-400">{s.label}</div>
-              <div className="mt-2 text-2xl font-semibold">{s.value}</div>
-            </div>
-          ))}
-        </section>
-
-        <section className="mt-12">
-          <h2 className="text-2xl font-semibold">Features</h2>
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {features.map((f) => {
-              const Icon = f.icon;
-              return (
-                <div key={f.title} className="bg-gray-900/40 p-4 rounded-lg border border-gray-800 flex gap-3 items-start">
-                  <div className="p-2 rounded-md bg-gradient-to-br from-violet-600 to-pink-500 text-black"><Icon /></div>
-                  <div>
-                    <div className="font-semibold">{f.title}</div>
-                    <div className="text-sm text-gray-400">{f.description}</div>
-                  </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 rounded-lg hover:bg-slate-800 transition-colors"
+                aria-label="Toggle menu"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  {mobileMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center">
+                  <span className="font-bold text-lg">V</span>
                 </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="mt-12 mb-20">
-          <h2 className="text-2xl font-semibold">How It Works</h2>
-          <div className="mt-6 bg-gray-900/50 p-6 rounded-lg border border-gray-800 text-center">
-            <div className="text-lg font-medium">Revenue → Dividends + Burn → Scarcity → Higher Yields → More TVL</div>
-            <div className="mt-4 text-sm text-gray-400">(Animated flywheel placeholder)</div>
-          </div>
-        </section>
-      </main>
-    </div>
-  );
-
-
-export default function Page() {
-  return (
- Stashed changes
-    <div className="min-h-screen">
-      <section className="relative h-screen flex items-center">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute -left-36 -top-36 w-[70vmin] h-[70vmin] rounded-full opacity-40" style={{
-            background: 'radial-gradient(circle at 30% 30%, rgba(139,92,246,0.18), transparent 25%), radial-gradient(circle at 70% 70%, rgba(236,72,153,0.12), transparent 20%), #000'
-          }} />
-          <div className="absolute -right-36 -bottom-36 w-[50vmin] h-[50vmin] rounded-full opacity-30" style={{
-            background: 'radial-gradient(circle at 40% 40%, rgba(236,72,153,0.14), transparent 20%), rgba(0,0,0,0.6)'
-          }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
-        </div>
-
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">Veil Hub: The Final DeFi Organism</h1>
-          <p className="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">Real monthly USDC dividends. Permanent token burn. Privacy-protected everything. One dApp to rule DeFi.</p>
-
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="px-6 py-3 rounded-md bg-gradient-to-r from-violet-500 to-pink-500 text-black font-semibold">Connect Wallet</button>
-            <button className="px-6 py-3 rounded-md border border-gray-700 text-gray-100">Lock VEIL &amp; Boost Yield</button>
-          </div>
-        </div>
-      </section>
-
-      <section className="-mt-20 relative z-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-900/60 p-6 rounded-lg border border-gray-800">
-              <div className="text-sm text-gray-400">TVL</div>
-              <div className="mt-2 text-2xl font-semibold">$3.24B</div>
-              <div className="mt-3 h-16">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={sampleData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.6} />
-                        <stop offset="100%" stopColor="#ec4899" stopOpacity={0.05} />
-                      </linearGradient>
-                    </defs>
-                    <XAxis dataKey="t" hide />
-                    <YAxis hide />
-                    <Tooltip wrapperStyle={{ background: '#0b0b0d', borderRadius: 8 }} />
-                    <Area type="monotone" dataKey="v" stroke="#8b5cf6" fill="url(#g1)" strokeWidth={2} />
-                  </AreaChart>
-                </ResponsiveContainer>
+                <span className="font-bold text-xl bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
+                  Veil Hub
+                </span>
               </div>
             </div>
 
-            <div className="bg-gray-900/60 p-6 rounded-lg border border-gray-800">
-              <div className="text-sm text-gray-400">Annual Revenue</div>
-              <div className="mt-2 text-2xl font-semibold">$412M</div>
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-all"
+                >
+                  {item.name}
+                </Link>
+              ))}
             </div>
 
-            <div className="bg-gray-900/60 p-6 rounded-lg border border-gray-800">
-              <div className="text-sm text-gray-400">Circulating Supply</div>
-              <div className="mt-2 text-2xl font-semibold">180M VEIL</div>
-              <div className="mt-3 w-full bg-gray-800 rounded-full h-3 overflow-hidden">
-                <div className="h-3 bg-gradient-to-r from-violet-500 to-pink-500" style={{ width: '57%' }} />
+            {/* Right Side */}
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-slate-800/50 rounded-lg border border-slate-700">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-sm">Supra L1</span>
               </div>
-            </div>
 
-            <div className="bg-gray-900/60 p-6 rounded-lg border border-gray-800">
-              <div className="text-sm text-gray-400">Your Estimated Dividend</div>
-              <div className="mt-2 text-xl font-medium text-gray-300">Connect to view</div>
+              <button
+                onClick={() => setIsConnected(!isConnected)}
+                className="px-4 py-2 bg-gradient-to-r from-violet-500 to-pink-500 hover:from-violet-600 hover:to-pink-600 rounded-lg font-medium transition-all shadow-lg shadow-violet-500/25"
+              >
+                {isConnected ? '0x742d...35ba' : 'Connect Wallet'}
+              </button>
             </div>
           </div>
+        </div>
 
-          <div className="mt-12">
-            <h2 className="text-2xl font-semibold">Features</h2>
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {[
-                ['⚔️','Perps Trading'],
-                ['🏦','Advanced Lending'],
-                ['🛡️','Auto Vaults'],
-                ['🔗','Yield Tokenization'],
-                ['🔁','Dual Restaking'],
-                ['📈','Phantom Indices'],
-                ['🔒','Encrypted Governance'],
-              ].map(([emoji, title])=> (
-                <div key={String(title)} className="bg-gray-900/50 p-4 rounded-lg border border-gray-800 flex items-start gap-3">
-                  <div className="text-2xl">{emoji}</div>
-                  <div>
-                    <div className="font-semibold">{title}</div>
-                    <div className="text-sm text-gray-400">Modern, composable primitives</div>
-                  </div>
-                </div>
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-slate-800 bg-slate-950">
+            <div className="px-4 py-4 space-y-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
               ))}
             </div>
           </div>
+        )}
+      </nav>
 
-          <div className="mt-12 mb-24">
-            <h2 className="text-2xl font-semibold">How It Works</h2>
-            <div className="mt-6 bg-gray-900/50 p-6 rounded-lg border border-gray-800 text-center">
-              <div className="text-lg font-medium">Revenue → Dividends + Burn → Scarcity → Higher Yields → More TVL</div>
-              <div className="mt-4 text-sm text-gray-400">(Animated flywheel placeholder)</div>
-            </div>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-violet-400 bg-clip-text text-transparent">
+              Veil Hub: The Final DeFi Organism
+            </span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto">
+            Real monthly USDC dividends. Permanent token burn. Privacy-protected
+            everything. One dApp to rule DeFi.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <button className="px-8 py-4 bg-gradient-to-r from-violet-500 to-pink-500 hover:from-violet-600 hover:to-pink-600 rounded-xl font-bold text-lg transition-all shadow-lg shadow-violet-500/25">
+              Connect Wallet
+            </button>
+            <button className="px-8 py-4 bg-slate-800/50 hover:bg-slate-700/50 backdrop-blur-sm border border-slate-700 hover:border-violet-500/50 rounded-xl font-bold text-lg transition-all">
+              Lock VEIL & Boost Yield
+            </button>
+          </div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            {stats.map((stat, idx) => (
+              <div
+                key={idx}
+                className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl p-4"
+              >
+                <div className="text-sm text-slate-400 mb-1">{stat.label}</div>
+                <div className="text-xl font-bold">{stat.value}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-    </div>
-  )
- Updated upstream
- Stashed changes
 
- Stashed changes
+      {/* Features Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Features</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, idx) => (
+              <div
+                key={idx}
+                className="bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all"
+              >
+                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                <p className="text-slate-400">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 px-6 bg-slate-950/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+          <p className="text-xl text-slate-400 mb-8">
+            Revenue → Dividends + Burn → Scarcity → Higher Yields → More TVL
+          </p>
+          <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-12">
+            <p className="text-slate-500">(Animated flywheel placeholder)</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h4 className="font-bold mb-4">Products</h4>
+              <ul className="space-y-2 text-slate-400">
+                <li>
+                  <Link href="/borrow" className="hover:text-violet-400 transition-colors">
+                    Borrowing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/vaults" className="hover:text-violet-400 transition-colors">
+                    Vaults
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/trade" className="hover:text-violet-400 transition-colors">
+                    Trading
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Governance</h4>
+              <ul className="space-y-2 text-slate-400">
+                <li>
+                  <Link href="/governance" className="hover:text-violet-400 transition-colors">
+                    Proposals
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-violet-400 transition-colors">
+                    veVEIL
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Developers</h4>
+              <ul className="space-y-2 text-slate-400">
+                <li>
+                  <Link href="/docs" className="hover:text-violet-400 transition-colors">
+                    Documentation
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/Thabiiey411beta/veil-hub-v2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-violet-400 transition-colors"
+                  >
+                    GitHub
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-4">Community</h4>
+              <ul className="space-y-2 text-slate-400">
+                <li>
+                  <a href="#" className="hover:text-violet-400 transition-colors">
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-violet-400 transition-colors">
+                    Discord
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-slate-400">
+              © 2024 Veil Hub. Built on Supra L1. Immortal by design.
+            </div>
+            <div className="flex gap-4 text-slate-400">
+              <a href="#" className="hover:text-violet-400 transition-colors">
+                Terms
+              </a>
+              <a href="#" className="hover:text-violet-400 transition-colors">
+                Privacy
+              </a>
+              <a href="#" className="hover:text-violet-400 transition-colors">
+                Security
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
 }
