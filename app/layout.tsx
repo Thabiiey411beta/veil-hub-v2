@@ -160,7 +160,20 @@ export default function RootLayout({ children }) {
         <div className="fixed bottom-4 right-4 z-50 space-y-2">
           {/* Toast notifications will appear here */}
         </div>
-      </body>
+      </body nav className="bg-background border-b px-6 py-4">
+  <div className="container mx-auto flex justify-between items-center">
+    <a href="/" className="text-2xl font-bold">Veil Hub</a>
+    <div className="space-x-6">
+      <a href="/" className="hover:text-primary">Home</a>
+      <a href="/dashboard" className="hover:text-primary">Dashboard</a>
+      <a href="/portfolio" className="hover:text-primary">Portfolio</a>
+      <a href="/vaults" className="hover:text-primary">Vaults</a>
+      <a href="/governance" className="hover:text-primary">Governance</a>
+      <a href="/notifications" className="hover:text-primary">Notifications</a>
+    </div>
+    <w3m-button /> {/* WalletConnect button if using Wagmi */}
+  </div>
+</nav>>
     </html>
   );
 }
