@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { SupraAccount, HexString } from 'supra-l1-sdk';
 
 declare global {
   interface Window {

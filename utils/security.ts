@@ -1,11 +1,8 @@
-import { HexString } from 'supra-l1-sdk';
-
 export class SecurityUtils {
   // Validate Supra address
   static isValidAddress(address: string): boolean {
     try {
-      new HexString(address);
-      return address.length === 66 && address.startsWith('0x');
+      return address.length === 66 && address.startsWith('0x') && /^0x[a-fA-F0-9]{64}$/.test(address);
     } catch {
       return false;
     }

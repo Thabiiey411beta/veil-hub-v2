@@ -1,146 +1,252 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   * {
-    box-sizing: border-box;
+    @apply transition-colors duration-200;
   }
-  
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+  html {
+    scroll-behavior: smooth;
   }
-  
+
   body {
-    background: #000000;
-    color: white;
-    overflow-x: hidden;
+    @apply bg-[#0A0A0A] text-[#E0E0E0];
+    font-family: 'Inter', sans-serif;
+    background-attachment: fixed;
   }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 215, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.5);
+}
+
+/* Animated gradient background */
+.bg-gradient-animated {
+  background: linear-gradient(
+    -45deg,
+    #0A0A0A,
+    #1a1a2e,
+    #0A0A0A,
+    #1a1a2e
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glow effect */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.glow-gold-lg {
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+}
+
+/* Hover glow */
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+/* Animated border */
+.border-animated {
+  position: relative;
+  border: 1px solid transparent;
+  background: linear-gradient(#0A0A0A, #0A0A0A) padding-box,
+    linear-gradient(135deg, #FFD700, rgba(255, 215, 0, 0.3)) border-box;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse animation */
+@keyframes pulse-custom {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.pulse-custom {
+  animation: pulse-custom 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0) 0%,
+    rgba(255, 215, 0, 0.2) 50%,
+    rgba(255, 215, 0, 0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  @apply transition-all duration-300 ease-out;
 }
 
 @layer components {
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 bg-[#FFD700] text-[#0A0A0A] font-bold rounded-lg hover:bg-[#FFF700] transition-all hover:shadow-lg hover:shadow-[#FFD700]/50;
   }
-  
-  .glass-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(168, 85, 247, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(168, 85, 247, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+  .btn-secondary {
+    @apply px-6 py-3 border border-[#FFD700] text-[#FFD700] font-bold rounded-lg hover:bg-[#FFD700]/10 transition-all;
   }
-  
-  .neon-button {
-    background: linear-gradient(135deg, #a855f7, #06b6d4);
-    border: 1px solid rgba(168, 85, 247, 0.5);
-    border-radius: 16px;
-    padding: 16px 32px;
-    font-weight: 600;
-    color: white;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
+
+  .btn-ghost {
+    @apply px-6 py-3 text-[#FFD700] hover:text-[#FFF700] transition-all;
   }
-  
-  .neon-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+
+  /* Card styles */
+  .card {
+    @apply border border-[#FFD700]/20 rounded-lg p-6 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 transition-all;
   }
-  
-  .neon-button:hover::before {
-    left: 100%;
+
+  .card-dark {
+    @apply bg-[#0A0A0A] border border-[#FFD700]/10;
   }
-  
-  .neon-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-      0 10px 30px rgba(168, 85, 247, 0.4),
-      0 0 0 1px rgba(168, 85, 247, 0.6);
+
+  /* Input styles */
+  .input-primary {
+    @apply w-full bg-[#FFD700]/5 border border-[#FFD700]/20 rounded-lg px-4 py-2 text-[#E0E0E0] placeholder-[#808080] focus:border-[#FFD700] focus:outline-none focus:ring-1 focus:ring-[#FFD700]/30 transition-all;
   }
-  
-  .gradient-text {
-    background: linear-gradient(135deg, #a855f7, #06b6d4, #ec4899);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 3s ease infinite;
+
+  /* Badge styles */
+  .badge {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-bold;
   }
-  
-  .glow-text {
-    text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+
+  .badge-gold {
+    @apply badge bg-[#FFD700]/20 text-[#FFD700] border border-[#FFD700]/30;
   }
-  
-  .floating-wallet {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 1000;
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .particles-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: radial-gradient(ellipse at top, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-  }
-  
-  .nebula-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-      radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-    animation: nebula-drift 20s ease-in-out infinite;
+
+  .badge-success {
+    @apply badge bg-green-500/20 text-green-400 border border-green-500/30;
   }
 }
 
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* Grid animations */
+.grid-animated {
+  display: grid;
+  gap: 1.5rem;
+  animation: fadeIn 0.6s ease-out;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes nebula-drift {
-  0%, 100% { transform: translateX(0px) translateY(0px); }
-  33% { transform: translateX(30px) translateY(-30px); }
-  66% { transform: translateX(-20px) translateY(20px); }
+/* Stagger animation for children */
+.stagger > * {
+  animation: fadeIn 0.6s ease-out;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.6); }
+.stagger > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stagger > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stagger > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stagger > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.stagger > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.stagger > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
