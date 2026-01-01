@@ -1,5 +1,5 @@
 import { createConfig, http } from "wagmi";
-import { connectkit } from "connectkit";
+import { getDefaultConfig } from "connectkit";
 import { defineChain } from "viem";
 
 export const supraMainnet = defineChain({
@@ -20,23 +20,19 @@ export const supraTestnet = defineChain({
 });
 
 export const config = createConfig(
-  connectkit({
+  getDefaultConfig({
     chains: [supraTestnet, supraMainnet],
     transports: {
       [supraMainnet.id]: http("https://rpc.supra.com", { 
         timeout: 30000,
         batch: false,
-        fetchOptions: { cache: 'no-store' },
       }),
       [supraTestnet.id]: http("https://rpc-testnet.supra.com", { 
         timeout: 30000,
         batch: false,
-        fetchOptions: { cache: 'no-store' },
       }),
     },
-    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo",
+    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "a6b64e79797169c4ad9b9fbfa62ebae0",
     appName: "Veil Hub",
-    ssr: true,
-    pollingInterval: 12000,
   })
 );

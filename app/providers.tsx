@@ -6,13 +6,27 @@ import { ConnectKitProvider } from 'connectkit'
 import { config } from '../config/wagmi'
 import { useState } from 'react'
 
+const queryClientConfig = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+      gcTime: 5 * 60 * 1000,
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      retry: 1,
+    },
+  },
+})
+
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(() => queryClientConfig)
 
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider theme="midnight">
+        <ConnectKitProvider theme="midnight" options={{ initialChainId: 6 }}>
           {children}
         </ConnectKitProvider>
       </QueryClientProvider>
