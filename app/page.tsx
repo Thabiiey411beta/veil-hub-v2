@@ -1,6 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const PriceWidget = dynamic(() => import('@/components/PriceWidget'), { ssr: true })
 
 export default function Home() {
   return (
@@ -21,14 +24,22 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="p-8">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold mb-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4">
             Welcome to <span className="text-[#FFD700]">Veil Hub v17</span>
           </h2>
           
-          <p className="text-lg text-[#B0B0B0] mb-12">
+          <p className="text-lg text-[#B0B0B0] mb-8">
             The Final DeFi Organism - Zero-liquidation borrowing, perpetual real yield, privacy-first.
           </p>
+
+          {/* Live Price Feed */}
+          <div className="mb-12">
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <span className="text-[#FFD700]">◆</span> Live Oracle Prices
+            </h3>
+            <PriceWidget />
+          </div>
 
           {/* Pages Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
@@ -62,7 +73,6 @@ export default function Home() {
                 key={i}
                 className="group border border-[#FFD700]/20 rounded-lg p-6 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 transition-all cursor-pointer"
                 onClick={() => {
-                  // Open component in new context
                   window.location.hash = `#${page.file}`;
                 }}
               >
