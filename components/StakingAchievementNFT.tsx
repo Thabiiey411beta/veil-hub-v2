@@ -5,7 +5,7 @@ import { GradientCard, RippleButton } from '@/components/EnhancedUI'
 
 interface StakerInfo {
   address: string
-  amount: u64
+  amount: number
   percentage: number
 }
 
