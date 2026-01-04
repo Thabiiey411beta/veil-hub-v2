@@ -15,9 +15,10 @@ export default function Home() {
             <span className="text-[#FFD700]">◆</span> VEIL HUB v17
           </h1>
           <div className="flex gap-6">
-            <a href="/docs" className="hover:text-[#FFD700] transition-colors">Docs</a>
-            <a href="/protocol" className="hover:text-[#FFD700] transition-colors">Protocol</a>
-            <a href="/governance" className="hover:text-[#FFD700] transition-colors">Governance</a>
+            <Link href="/analytics" className="hover:text-[#FFD700] transition-colors">Analytics</Link>
+            <Link href="/dashboard" className="hover:text-[#FFD700] transition-colors">Dashboard</Link>
+            <Link href="/dex" className="hover:text-[#FFD700] transition-colors">DEX</Link>
+            <Link href="/docs" className="hover:text-[#FFD700] transition-colors">Docs</Link>
           </div>
         </div>
       </nav>
@@ -48,38 +49,36 @@ export default function Home() {
                 title: 'Analytics', 
                 desc: 'Protocol-wide performance and real-time metrics',
                 icon: '📈',
-                file: 'analytics-premium'
+                href: '/analytics'
               },
               { 
                 title: 'Dashboard', 
                 desc: 'Real-time metrics and portfolio tracking',
                 icon: '📊',
-                file: 'dashboard-updated'
+                href: '/dashboard'
               },
               { 
                 title: 'Perpetual DEX', 
                 desc: 'Advanced trading interface with LP VACUUM',
                 icon: '💱',
-                file: 'perpetual-dex-updated'
+                href: '/dex'
               },
               { 
                 title: 'Tokenomics', 
                 desc: 'Token distribution and revenue flows',
                 icon: '💎',
-                file: 'tokenomics-premium'
+                href: '/tokenomics'
               },
             ].map((page, i) => (
-              <div
+              <Link
                 key={i}
-                className="group border border-[#FFD700]/20 rounded-lg p-6 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 transition-all cursor-pointer"
-                onClick={() => {
-                  window.location.hash = `#${page.file}`;
-                }}
+                href={page.href}
+                className="group border border-[#FFD700]/20 rounded-lg p-6 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 transition-all"
               >
                 <div className="text-3xl mb-3">{page.icon}</div>
                 <h3 className="font-bold mb-2 group-hover:text-[#FFD700] transition-colors">{page.title}</h3>
                 <p className="text-sm text-[#808080]">{page.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
 
