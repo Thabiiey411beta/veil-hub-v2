@@ -19,6 +19,7 @@ export default function Home() {
             <Link href="/analytics" className="hover:text-[#FFD700] transition-colors text-sm">Analytics</Link>
             <Link href="/dashboard" className="hover:text-[#FFD700] transition-colors text-sm">Dashboard</Link>
             <Link href="/dex" className="hover:text-[#FFD700] transition-colors text-sm">DEX</Link>
+            <Link href="/magic" className="hover:text-[#FFD700] transition-colors text-sm">✨ Magic</Link>
             <Link href="/docs" className="hover:text-[#FFD700] transition-colors text-sm">Docs</Link>
           </div>
         </div>
