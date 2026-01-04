@@ -16,6 +16,7 @@ const navItems: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: '📊', category: 'trading' },
   { label: 'Analytics', href: '/analytics', icon: '📈', category: 'trading' },
   { label: 'DEX', href: '/dex', icon: '💱', category: 'trading' },
+  { label: 'Indices', href: '/indices', icon: '🎭', category: 'trading' },
   { label: 'Tokenomics', href: '/tokenomics', icon: '💎', category: 'protocol' },
   { label: 'Vaults', href: '/vaults', icon: '🏦', category: 'protocol' },
   { label: 'Governance', href: '/governance', icon: '🗳️', category: 'protocol' },
