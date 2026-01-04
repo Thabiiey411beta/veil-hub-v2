@@ -4,6 +4,7 @@ import './globals.css'
 import { Providers } from './providers'
 import { Toaster } from 'react-hot-toast'
 import { Sidebar } from '@/components/Sidebar'
+import { NotificationBar } from '@/components/NotificationBar'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -33,8 +34,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Toaster position="top-right" />
+          <NotificationBar />
           <Sidebar />
-          <div className="ml-64 transition-all duration-300">
+          <div className="ml-64 transition-all duration-300 pt-24">
             {children}
           </div>
         </Providers>
