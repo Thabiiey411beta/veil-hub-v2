@@ -3,30 +3,15 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { GradientCard, StatCounter, RippleButton, GradientText, AnimatedBadge } from '@/components/EnhancedUI'
+import { SuggestionPanel } from '@/components/SuggestionPanel'
 
 const PriceWidget = dynamic(() => import('@/components/PriceWidget'), { ssr: true })
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A0A0A] via-[#1a1a2e] to-[#0A0A0A] text-[#E0E0E0] font-['Inter']">
-      {/* Navigation */}
-      <nav className="border-b border-[#FFD700]/10 px-8 py-6 backdrop-blur-sm">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">
-            <span className="text-[#FFD700]">◆</span> <GradientText>VEIL HUB</GradientText>
-          </h1>
-          <div className="flex gap-6">
-            <Link href="/analytics" className="hover:text-[#FFD700] transition-colors text-sm">Analytics</Link>
-            <Link href="/dashboard" className="hover:text-[#FFD700] transition-colors text-sm">Dashboard</Link>
-            <Link href="/dex" className="hover:text-[#FFD700] transition-colors text-sm">DEX</Link>
-            <Link href="/magic" className="hover:text-[#FFD700] transition-colors text-sm">✨ Magic</Link>
-            <Link href="/docs" className="hover:text-[#FFD700] transition-colors text-sm">Docs</Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <div className="p-8">
+      {/* Hero Section */}
+      <div className="p-8 border-b border-[#FFD700]/10">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="text-5xl font-bold mb-4">
@@ -64,8 +49,15 @@ export default function Home() {
               <StatCounter value="52M" label="Total Burned" />
             </GradientCard>
           </div>
+        </div>
+      </div>
 
-          {/* Pages Grid */}
+      {/* Pages Grid */}
+      <div className="p-8">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-2xl font-bold mb-8">
+            <span className="text-[#FFD700]">✨</span> Explore Features
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {[
               { 
@@ -104,7 +96,7 @@ export default function Home() {
                   <p className="text-sm text-[#808080]">{page.desc}</p>
                 </GradientCard>
               </Link>
-            ))}
+            ))}\
           </div>
 
           {/* Features */}
@@ -138,6 +130,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* AI Suggestion Panel */}
+      <SuggestionPanel page="home" />
     </div>
   )
 }

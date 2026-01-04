@@ -1,189 +1,245 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import React, { useState } from 'react'
+import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { SuggestionPanel } from '@/components/SuggestionPanel'
+import { GradientCard, StatCounter, AnimatedBadge } from '@/components/EnhancedUI'
 
 export default function FinancePage() {
-  const [activeTab, setActiveTab] = useState('overview');
+  const portfolioData = [
+    { date: 'Day 1', value: 100000 },
+    { date: 'Day 5', value: 102500 },
+    { date: 'Day 10', value: 105200 },
+    { date: 'Day 15', value: 108100 },
+    { date: 'Day 20', value: 111300 },
+    { date: 'Day 25', value: 114800 },
+    { date: 'Day 30', value: 118500 },
+  ]
+
+  const transactions = [
+    { id: 1, type: 'Deposit', asset: 'VEIL', amount: 50000, value: '$42,500', date: '2024-02-10', status: 'Completed' },
+    { id: 2, type: 'Borrow', asset: 'USDC', amount: 25000, value: '$25,000', date: '2024-02-09', status: 'Completed' },
+    { id: 3, type: 'Yield', asset: 'USDC', amount: 1250, value: '$1,250', date: '2024-02-08', status: 'Completed' },
+    { id: 4, type: 'Swap', asset: 'ETH→USDC', amount: 5, value: '$12,250', date: '2024-02-07', status: 'Completed' },
+    { id: 5, type: 'Lock', asset: 'VEIL', amount: 10000, value: '$8,500', date: '2024-02-06', status: 'Completed' },
+  ]
 
   return (
-    <div className="min-h-screen bg-black text-white p-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#0A0A0A] via-[#1a1a2e] to-[#0A0A0A] text-[#E0E0E0] p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-12">
-          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-            Veil Finance
-          </h1>
-          <p className="text-2xl text-gray-300">
-            Pure, Unregulated, Maximalist DeFi Organism
-          </p>
-          <p className="text-gray-400 mt-2">
-            100% Supra L1 Native • Zero KYC • Zero Compliance • Real Yield Forever
-          </p>
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-2">Finance</h1>
+          <p className="text-[#B0B0B0]">Portfolio management and transaction history</p>
         </div>
 
-        {/* Tabs */}
-        <div className="flex gap-4 mb-8 border-b border-white/10">
-          {['overview', 'perps', 'vaults', 'shadow-gas'].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3 font-semibold transition-all ${
-                activeTab === tab
-                  ? 'text-cyan-400 border-b-2 border-cyan-400'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              {tab.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
-            </button>
-          ))}
+        {/* Portfolio Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <GradientCard>
+            <StatCounter value="$118.5K" label="Portfolio Value" />
+          </GradientCard>
+          <GradientCard>
+            <StatCounter value="$18.5K" label="Total Gains" suffix="(+18.5%)" />
+          </GradientCard>
+          <GradientCard>
+            <StatCounter value="$85K" label="Deposited" />
+          </GradientCard>
+          <GradientCard>
+            <StatCounter value="$25K" label="Borrowed" />
+          </GradientCard>
         </div>
 
-        {/* Overview Tab */}
-        {activeTab === 'overview' && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6">
-              <div className="text-4xl mb-2">🌑</div>
-              <h3 className="text-xl font-bold mb-2">Ghost Borrowing</h3>
-              <p className="text-gray-400 mb-4">Zero-liquidation loans at 5.5% APR with ZK privacy</p>
-              <div className="text-3xl font-bold text-cyan-400">5.5% APR</div>
-            </div>
+        {/* Portfolio Chart */}
+        <GradientCard className="mb-8">
+          <h3 className="text-lg font-bold mb-4">Portfolio Growth (30 Days)</h3>
+          <ResponsiveContainer width="100%" height={350}>
+            <AreaChart data={portfolioData}>
+              <defs>
+                <linearGradient id="colorPortfolio" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#FFD700" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#FFD700" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+              <XAxis dataKey="date" stroke="#808080" />
+              <YAxis stroke="#808080" />
+              <Tooltip
+                contentStyle={{ backgroundColor: '#1a1a2e', border: '1px solid #FFD700' }}
+                labelStyle={{ color: '#FFD700' }}
+                formatter={(value: any) => `$${value.toLocaleString()}`}
+              />
+              <Area type="monotone" dataKey="value" stroke="#FFD700" fillOpacity={1} fill="url(#colorPortfolio)" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </GradientCard>
 
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6">
-              <div className="text-4xl mb-2">⚡</div>
-              <h3 className="text-xl font-bold mb-2">Perpetual DEX</h3>
-              <p className="text-gray-400 mb-4">Private perps with 5 bps fees</p>
-              <div className="text-3xl font-bold text-purple-400">50x Leverage</div>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6">
-              <div className="text-4xl mb-2">👻</div>
-              <h3 className="text-xl font-bold mb-2">Ghost Vaults</h3>
-              <p className="text-gray-400 mb-4">ZK-private auto-compounding strategies</p>
-              <div className="text-3xl font-bold text-green-400">15-40% APY</div>
-            </div>
-          </div>
-        )}
-
-        {/* Perps Tab */}
-        {activeTab === 'perps' && (
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-            <h2 className="text-3xl font-bold mb-6">Perpetual Trading</h2>
-            <div className="grid grid-cols-2 gap-6 mb-8">
-              <div>
-                <div className="text-gray-400 mb-2">Trading Fee</div>
-                <div className="text-2xl font-bold">5 bps (0.05%)</div>
-              </div>
-              <div>
-                <div className="text-gray-400 mb-2">Max Leverage</div>
-                <div className="text-2xl font-bold">50x</div>
-              </div>
-              <div>
-                <div className="text-gray-400 mb-2">Liquidation</div>
-                <div className="text-2xl font-bold">90%</div>
-              </div>
-              <div>
-                <div className="text-gray-400 mb-2">Privacy</div>
-                <div className="text-2xl font-bold text-cyan-400">ZK-Private</div>
-              </div>
-            </div>
-            <div className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-xl">
-              <p className="text-sm text-gray-300">
-                🚀 <strong>Coming Q2 2026:</strong> First truly private perpetual DEX on Supra L1
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Vaults Tab */}
-        {activeTab === 'vaults' && (
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-            <h2 className="text-3xl font-bold mb-6">Ghost Vaults</h2>
-            <div className="space-y-4">
-              <div className="p-6 bg-white/5 border border-white/10 rounded-xl">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold">ETH Delta-Neutral</h3>
-                  <span className="text-2xl font-bold text-green-400">18-25% APY</span>
+        {/* Asset Breakdown */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {/* Holdings */}
+          <GradientCard>
+            <h3 className="text-lg font-bold mb-4">Your Holdings</h3>
+            <div className="space-y-3">
+              {[
+                { asset: 'VEIL', amount: 50000, value: '$42,500', change: '+5.2%', color: '#FFD700' },
+                { asset: 'USDC', amount: 35000, value: '$35,000', change: '+0.0%', color: '#10b981' },
+                { asset: 'ETH', amount: 10, value: '$24,500', change: '+2.1%', color: '#8b5cf6' },
+                { asset: 'BTC', amount: 0.5, value: '$21,425', change: '+1.8%', color: '#f59e0b' },
+              ].map((holding, i) => (
+                <div key={i} className="flex items-center justify-between p-3 bg-[#0A0A0A] border border-[#FFD700]/10 rounded-lg hover:border-[#FFD700]/30 transition-all">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: holding.color }} />
+                    <div>
+                      <div className="font-semibold">{holding.asset}</div>
+                      <div className="text-xs text-[#B0B0B0]">{holding.amount} {holding.asset}</div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-[#FFD700]">{holding.value}</div>
+                    <div className={`text-xs ${holding.change.startsWith('+') ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>
+                      {holding.change}
+                    </div>
+                  </div>
                 </div>
-                <p className="text-gray-400">Long wstETH + Short ETH perp = capture funding rate</p>
-              </div>
+              ))}
+            </div>
+          </GradientCard>
 
-              <div className="p-6 bg-white/5 border border-white/10 rounded-xl">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold">BTC Basis Trade</h3>
-                  <span className="text-2xl font-bold text-green-400">12-20% APY</span>
+          {/* Income Sources */}
+          <GradientCard>
+            <h3 className="text-lg font-bold mb-4">Income Sources</h3>
+            <div className="space-y-3">
+              {[
+                { source: 'Immortal Yield', amount: '$1,250', frequency: 'Weekly', icon: '💎' },
+                { source: 'Vault APY', amount: '$850', frequency: 'Daily', icon: '🏦' },
+                { source: 'veVEIL Boost', amount: '$450', frequency: 'Weekly', icon: '🚀' },
+                { source: 'Referral Bonus', amount: '$125', frequency: 'Monthly', icon: '🤝' },
+              ].map((income, i) => (
+                <div key={i} className="flex items-center justify-between p-3 bg-[#0A0A0A] border border-[#FFD700]/10 rounded-lg hover:border-[#FFD700]/30 transition-all">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{income.icon}</span>
+                    <div>
+                      <div className="font-semibold text-sm">{income.source}</div>
+                      <div className="text-xs text-[#B0B0B0]">{income.frequency}</div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-[#10b981]">{income.amount}</div>
+                  </div>
                 </div>
-                <p className="text-gray-400">Long cbBTC + Short BTC perp = pure basis capture</p>
-              </div>
-
-              <div className="p-6 bg-white/5 border border-white/10 rounded-xl">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-bold">Leveraged LST</h3>
-                  <span className="text-2xl font-bold text-green-400">25-40% APY</span>
-                </div>
-                <p className="text-gray-400">Recursive wstETH staking with auto-compounding</p>
-              </div>
+              ))}
             </div>
-          </div>
-        )}
-
-        {/* Shadow Gas Tab */}
-        {activeTab === 'shadow-gas' && (
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-            <h2 className="text-3xl font-bold mb-6">Shadow Gas (Privacy Tax)</h2>
-            <div className="mb-8">
-              <div className="text-6xl font-bold text-cyan-400 mb-2">120,000</div>
-              <div className="text-gray-400">Shadow Gas per 1 VEIL burned</div>
-            </div>
-
-            <div className="space-y-4 mb-8">
-              <div className="flex justify-between p-4 bg-white/5 rounded-xl">
-                <span className="text-gray-300">Private Deposit</span>
-                <span className="font-bold">1,000 Shadow Gas</span>
-              </div>
-              <div className="flex justify-between p-4 bg-white/5 rounded-xl">
-                <span className="text-gray-300">Private Borrow</span>
-                <span className="font-bold">2,500 Shadow Gas</span>
-              </div>
-              <div className="flex justify-between p-4 bg-white/5 rounded-xl">
-                <span className="text-gray-300">Private Trade</span>
-                <span className="font-bold">500 Shadow Gas</span>
-              </div>
-              <div className="flex justify-between p-4 bg-white/5 rounded-xl">
-                <span className="text-gray-300">Private Withdraw</span>
-                <span className="font-bold">1,500 Shadow Gas</span>
-              </div>
-            </div>
-
-            <div className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-xl">
-              <p className="text-sm text-gray-300">
-                💀 <strong>The more you hide, the more VEIL burns.</strong> Shadow Gas expires in 90 days.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Stats */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-white/10 rounded-2xl p-6">
-            <div className="text-gray-400 mb-2">Projected USDC Yield</div>
-            <div className="text-3xl font-bold">22-35% APR</div>
-          </div>
-
-          <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-white/10 rounded-2xl p-6">
-            <div className="text-gray-400 mb-2">Yearly VEIL Burn</div>
-            <div className="text-3xl font-bold">280-380M</div>
-          </div>
-
-          <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-white/10 rounded-2xl p-6">
-            <div className="text-gray-400 mb-2">Supply Reduction</div>
-            <div className="text-3xl font-bold">28-38%</div>
-          </div>
-
-          <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-white/10 rounded-2xl p-6">
-            <div className="text-gray-400 mb-2">Launch</div>
-            <div className="text-3xl font-bold">Q1 2026</div>
-          </div>
+          </GradientCard>
         </div>
+
+        {/* Transaction History */}
+        <GradientCard className="mb-8">
+          <h3 className="text-lg font-bold mb-4">Transaction History</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[#FFD700]/10">
+                  <th className="text-left py-3 px-4 text-[#B0B0B0]">Type</th>
+                  <th className="text-left py-3 px-4 text-[#B0B0B0]">Asset</th>
+                  <th className="text-left py-3 px-4 text-[#B0B0B0]">Amount</th>
+                  <th className="text-left py-3 px-4 text-[#B0B0B0]">Value</th>
+                  <th className="text-left py-3 px-4 text-[#B0B0B0]">Date</th>
+                  <th className="text-left py-3 px-4 text-[#B0B0B0]">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((tx) => (
+                  <tr key={tx.id} className="border-b border-[#FFD700]/5 hover:bg-[#FFD700]/5">
+                    <td className="py-3 px-4">
+                      <span className="px-2 py-1 rounded-full text-xs font-semibold bg-[#FFD700]/10 text-[#FFD700]">
+                        {tx.type}
+                      </span>
+                    </td>
+                    <td className="py-3 px-4">{tx.asset}</td>
+                    <td className="py-3 px-4">{tx.amount.toLocaleString()}</td>
+                    <td className="py-3 px-4 text-[#FFD700] font-semibold">{tx.value}</td>
+                    <td className="py-3 px-4 text-[#B0B0B0]">{tx.date}</td>
+                    <td className="py-3 px-4">
+                      <AnimatedBadge variant="success">{tx.status}</AnimatedBadge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </GradientCard>
+
+        {/* Financial Summary */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <GradientCard>
+            <h3 className="text-lg font-bold mb-4">Monthly Summary</h3>
+            <div className="space-y-3">
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">Total Deposits</span>
+                <span className="text-[#FFD700] font-semibold">$85,000</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">Total Withdrawals</span>
+                <span className="text-[#FFD700] font-semibold">$0</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">Interest Earned</span>
+                <span className="text-[#10b981] font-semibold">$3,500</span>
+              </div>
+              <div className="border-t border-[#FFD700]/10 pt-3 flex justify-between">
+                <span className="text-[#B0B0B0] font-semibold">Net Gain</span>
+                <span className="text-[#10b981] font-bold text-lg">$3,500</span>
+              </div>
+            </div>
+          </GradientCard>
+
+          <GradientCard>
+            <h3 className="text-lg font-bold mb-4">Risk Metrics</h3>
+            <div className="space-y-3">
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">Collateral Ratio</span>
+                <span className="text-[#10b981] font-semibold">195%</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">Liquidation Price</span>
+                <span className="text-[#FFD700] font-semibold">$0.42</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">Debt Ratio</span>
+                <span className="text-[#10b981] font-semibold">21%</span>
+              </div>
+              <div className="border-t border-[#FFD700]/10 pt-3 flex justify-between">
+                <span className="text-[#B0B0B0] font-semibold">Risk Level</span>
+                <span className="text-[#10b981] font-bold">Low</span>
+              </div>
+            </div>
+          </GradientCard>
+
+          <GradientCard>
+            <h3 className="text-lg font-bold mb-4">Performance</h3>
+            <div className="space-y-3">
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">30-Day Return</span>
+                <span className="text-[#10b981] font-semibold">+18.5%</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">Avg APY</span>
+                <span className="text-[#FFD700] font-semibold">18.5%</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#B0B0B0]">Sharpe Ratio</span>
+                <span className="text-[#FFD700] font-semibold">2.3</span>
+              </div>
+              <div className="border-t border-[#FFD700]/10 pt-3 flex justify-between">
+                <span className="text-[#B0B0B0] font-semibold">Rank</span>
+                <span className="text-[#FFD700] font-bold">Top 5%</span>
+              </div>
+            </div>
+          </GradientCard>
+        </div>
+
+        {/* AI Suggestion Panel */}
+        <SuggestionPanel page="finance" />
       </div>
     </div>
-  );
+  )
 }
