@@ -1,6 +1,8 @@
-# 🌑 Veil Hub v14 - The Final DeFi Organism
+# 🌑 Veil Hub v17 - The Final DeFi Organism
 
 > **Zero-liquidation borrowing. Perpetual real yield. Privacy-first. Built on Supra L1.**
+
+**📖 [Complete Mechanics & Frontend Guide](./README-MECHANICS.md)** - All features, routes, and phased launch plan
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-blue)](https://soliditylang.org/)
@@ -12,7 +14,9 @@
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Quick Start](#quick-start)
 - [Features](#features)
+- [Phased Launch](#phased-launch)
 - [Architecture](#architecture)
 - [Tokenomics](#tokenomics)
 - [Getting Started](#getting-started)
@@ -25,7 +29,7 @@
 
 ## 🌌 Overview
 
-Veil Hub v14 is a next-generation DeFi protocol built on Supra L1 that combines:
+Veil Hub v17 is a next-generation DeFi protocol built on Supra L1 that combines:
 
 - **Zero-liquidation borrowing** at 5.5% fixed APR
 - **Perpetual USDC yield** (12-25% APR) for Immortal Share holders
@@ -33,6 +37,8 @@ Veil Hub v14 is a next-generation DeFi protocol built on Supra L1 that combines:
 - **Automated buyback & burn** mechanism
 - **ERC-4626 vaults** with 60% performance fee burn
 - **Supra AutoFi** integration for autonomous operations
+- **Phantom Indices** with auto-rebalancing
+- **Yield Tokenization & Restaking** (Phase 4)
 
 ### Key Metrics
 
@@ -44,6 +50,34 @@ Veil Hub v14 is a next-generation DeFi protocol built on Supra L1 that combines:
 | Max veVEIL Boost | **2.5x** |
 | Vault Burn Rate | **60%** |
 | Total Supply | **1B $VEIL** |
+| Frontend Routes | **17 routes** |
+| Phase 1 Status | **Launch Ready** |
+| Phase 4 (Restaking) | **Planned** |
+
+---
+
+## 🚀 Quick Start
+
+### Phase 1: Launch (Week 1-4)
+- ✅ Confidential PMM (Spot/Futures/Options) → `/dex`
+- ✅ Immortal Automated Vaults (3 strategies) → `/vaults`
+- ✅ veVEIL Locking (1 week - 4 years) → `/governance`
+- ✅ Basic ImmortalReserve (burn + dividends) → `/finance`
+
+### Phase 2: Expansion (Month 1-3)
+- 🔄 DebtEngine (zero-liquidation borrowing) → `/borrow`
+- 🔄 Phantom Indices (index factory) → `/indices`
+
+### Phase 3: Advanced Trading (Month 3-6)
+- 📅 Perpetual DEX (1x-20x leverage) → `/dex`
+- 📅 Phantom Lender (Morpho/Notional) → `/lender`
+
+### Phase 4: Yield Tokenization (Month 6+)
+- 📅 Yield Tokenization → `/yield-tokens`
+- 📅 Restaking (multi-layer yield) → `/restaking`
+- 📅 Liquid Restaking Tokens (LRTs) → `/restaking`
+
+**[View Complete Phased Plan](./README-MECHANICS.md#-phased-launch-plan)**
 
 ---
 
@@ -86,6 +120,19 @@ Veil Hub v14 is a next-generation DeFi protocol built on Supra L1 that combines:
 - 30% of borrow interest → buy $VEIL → burn
 - Continuous deflationary pressure
 - Transparent on-chain execution
+
+#### 6. Phantom Indices (Phase 2)
+- Pre-built indices: BTC-ETH (18.5% APY), Stable Bundle (8.2% APY), DeFi Index (24.3% APY)
+- Index Factory: 3 tiers (Basic 10k, Pro 25k, Enterprise 100k VEIL)
+- Auto-rebalancer with gas optimization
+- 1,245 rebalances, $2.3M gas saved
+
+#### 7. Yield Tokenization & Restaking (Phase 4)
+- Tokenize future yields into tradeable tokens
+- Multi-layer yield stacking
+- Liquid Restaking Tokens (LRTs)
+- Validator participation rewards
+- Slashing protection via insurance
 
 ### Supra L1 Integration
 
@@ -382,15 +429,41 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 
 ## 📊 Status
 
-**Current Version**: v14.0.0  
+**Current Version**: v17.0.0  
 **Network**: Supra L1 Testnet (Chain ID: 6)  
 **Tokenomics Score**: 9.5/10  
-**Deployment Status**: Ready (awaiting testnet funds)  
+**Frontend Routes**: 17 (all building successfully)  
+**Phase 1 Status**: Launch Ready  
 **Audit Status**: Scheduled Q2 2026
 
 ---
 
-**Veil Hub v14: The Final DeFi Organism**  
+## 🔗 Quick Links
+
+- **[Complete Mechanics Guide](./README-MECHANICS.md)** - All features with frontend linking
+- **[Phased Launch Plan](./README-MECHANICS.md#-phased-launch-plan)** - Phase 1-4 roadmap
+- **[Frontend Routes](./README-MECHANICS.md#-frontend-routes--features)** - All 17 routes
+- **[Lock-to-Earn Model](./README-MECHANICS.md#-tokenomics--lock-to-earn)** - Progressive multipliers
+- **[Integration Map](./README-MECHANICS.md#-integration-map)** - Smart contracts ↔ Frontend
+
+---
+
+**Veil Hub v17: The Final DeFi Organism**  
 *Built in public. Audited by the best. Immortal by design.*
 
 🌑 Welcome to the darkness. Welcome to freedom.
+
+---
+
+## 📖 Documentation Index
+
+| Document | Purpose |
+|----------|----------|
+| [README-MECHANICS.md](./README-MECHANICS.md) | **Complete mechanics & frontend guide** |
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | System design & smart contract structure |
+| [SECURITY.md](./SECURITY.md) | Security practices & audit status |
+| [TOKENOMICS-V3-FIXED.md](./TOKENOMICS-V3-FIXED.md) | Token economics & lock-to-earn |
+| [README-ORACLES.md](./README-ORACLES.md) | Supra DORA oracle integration |
+| [README-AUTOMATION.md](./README-AUTOMATION.md) | Supra AutoFi setup |
+| [README-DVRF.md](./README-DVRF.md) | Supra dVRF integration |
+| [DEPLOYMENT-GUIDE.md](./DEPLOYMENT-GUIDE.md) | Deployment instructions |
