@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import { GradientCard, StatCounter, RippleButton, GradientText, AnimatedBadge } from '@/components/EnhancedUI'
 
 const PriceWidget = dynamic(() => import('@/components/PriceWidget'), { ssr: true })
 
@@ -9,16 +10,16 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A0A0A] via-[#1a1a2e] to-[#0A0A0A] text-[#E0E0E0] font-['Inter']">
       {/* Navigation */}
-      <nav className="border-b border-[#FFD700]/10 px-8 py-6">
+      <nav className="border-b border-[#FFD700]/10 px-8 py-6 backdrop-blur-sm">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">
-            <span className="text-[#FFD700]">◆</span> VEIL HUB v17
+            <span className="text-[#FFD700]">◆</span> <GradientText>VEIL HUB</GradientText>
           </h1>
           <div className="flex gap-6">
-            <Link href="/analytics" className="hover:text-[#FFD700] transition-colors">Analytics</Link>
-            <Link href="/dashboard" className="hover:text-[#FFD700] transition-colors">Dashboard</Link>
-            <Link href="/dex" className="hover:text-[#FFD700] transition-colors">DEX</Link>
-            <Link href="/docs" className="hover:text-[#FFD700] transition-colors">Docs</Link>
+            <Link href="/analytics" className="hover:text-[#FFD700] transition-colors text-sm">Analytics</Link>
+            <Link href="/dashboard" className="hover:text-[#FFD700] transition-colors text-sm">Dashboard</Link>
+            <Link href="/dex" className="hover:text-[#FFD700] transition-colors text-sm">DEX</Link>
+            <Link href="/docs" className="hover:text-[#FFD700] transition-colors text-sm">Docs</Link>
           </div>
         </div>
       </nav>
@@ -26,13 +27,18 @@ export default function Home() {
       {/* Main Content */}
       <div className="p-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold mb-4">
-            Welcome to <span className="text-[#FFD700]">Veil Hub v17</span>
-          </h2>
-          
-          <p className="text-lg text-[#B0B0B0] mb-8">
-            The Final DeFi Organism - Zero-liquidation borrowing, perpetual real yield, privacy-first.
-          </p>
+          <div className="mb-12">
+            <h2 className="text-5xl font-bold mb-4">
+              Welcome to <GradientText>Veil Hub v17</GradientText>
+            </h2>
+            <p className="text-lg text-[#B0B0B0] mb-4">
+              The Final DeFi Organism - Zero-liquidation borrowing, perpetual real yield, privacy-first.
+            </p>
+            <div className="flex gap-2 mb-8">
+              <AnimatedBadge variant="success">Live on Supra L1</AnimatedBadge>
+              <AnimatedBadge>Testnet Ready</AnimatedBadge>
+            </div>
+          </div>
 
           {/* Live Price Feed */}
           <div className="mb-12">
@@ -40,6 +46,22 @@ export default function Home() {
               <span className="text-[#FFD700]">◆</span> Live Oracle Prices
             </h3>
             <PriceWidget />
+          </div>
+
+          {/* Key Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <GradientCard>
+              <StatCounter value="$245M" label="Total Value Locked" />
+            </GradientCard>
+            <GradientCard>
+              <StatCounter value="18.5" label="Average APY" suffix="%" />
+            </GradientCard>
+            <GradientCard>
+              <StatCounter value="8.5K" label="Active Users" />
+            </GradientCard>
+            <GradientCard>
+              <StatCounter value="52M" label="Total Burned" />
+            </GradientCard>
           </div>
 
           {/* Pages Grid */}
@@ -73,11 +95,13 @@ export default function Home() {
               <Link
                 key={i}
                 href={page.href}
-                className="group border border-[#FFD700]/20 rounded-lg p-6 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 transition-all"
+                className="group"
               >
-                <div className="text-3xl mb-3">{page.icon}</div>
-                <h3 className="font-bold mb-2 group-hover:text-[#FFD700] transition-colors">{page.title}</h3>
-                <p className="text-sm text-[#808080]">{page.desc}</p>
+                <GradientCard className="h-full">
+                  <div className="text-4xl mb-3">{page.icon}</div>
+                  <h3 className="font-bold mb-2 group-hover:text-[#FFD700] transition-colors">{page.title}</h3>
+                  <p className="text-sm text-[#808080]">{page.desc}</p>
+                </GradientCard>
               </Link>
             ))}
           </div>
@@ -96,12 +120,20 @@ export default function Home() {
                 { title: '30% Buyback', desc: 'Borrow Interest' },
                 { title: 'Zero Liquidation', desc: 'Safe Borrowing' },
               ].map((feature, i) => (
-                <div key={i} className="border border-[#FFD700]/20 rounded-lg p-4 hover:border-[#FFD700]/50 transition-all">
+                <GradientCard key={i}>
                   <div className="text-[#FFD700] font-bold mb-1">{feature.title}</div>
                   <div className="text-xs text-[#808080]">{feature.desc}</div>
-                </div>
+                </GradientCard>
               ))}
             </div>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-16 text-center">
+            <p className="text-[#B0B0B0] mb-6">Ready to experience the future of DeFi?</p>
+            <RippleButton>
+              <Link href="/dashboard">Launch Dashboard</Link>
+            </RippleButton>
           </div>
         </div>
       </div>
