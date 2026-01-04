@@ -18,6 +18,7 @@ const navItems: NavItem[] = [
   { label: 'DEX', href: '/dex', icon: '💱', category: 'trading' },
   { label: 'Indices', href: '/indices', icon: '🎭', category: 'trading' },
   { label: 'Restaking', href: '/restaking', icon: '🔗', category: 'trading' },
+  { label: 'Staking NFT', href: '/staking-nft', icon: '🏆', category: 'trading' },
   { label: 'Tokenomics', href: '/tokenomics', icon: '💎', category: 'protocol' },
   { label: 'Vaults', href: '/vaults', icon: '🏦', category: 'protocol' },
   { label: 'Governance', href: '/governance', icon: '🗳️', category: 'protocol' },
