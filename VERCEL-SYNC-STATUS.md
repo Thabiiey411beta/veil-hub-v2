@@ -3,7 +3,7 @@
 ## 🔗 Deployment Links
 
 - **Repository**: https://github.com/Thabiiey411beta/veil-hub-v2
-- **Vercel Deployment**: https://veil-hub-v2.vercel.app
+- **Vercel Deployment**: https://veil-hub-mvm.vercel.app
 - **Branch**: main
 
 ---
@@ -202,7 +202,7 @@ Vercel will automatically:
 
 **Status**: ✅ **SYNCED & READY**
 
-All latest changes have been successfully pushed to the GitHub repository and are ready for Vercel deployment. The Vercel deployment at https://veil-hub-v2.vercel.app will automatically sync with the latest changes.
+All latest changes have been successfully pushed to the GitHub repository and are ready for Vercel deployment. The Vercel deployment at https://veil-hub-mvm.vercel.app will automatically sync with the latest changes.
 
 **Total Changes**:
 - 5 new premium UI pages

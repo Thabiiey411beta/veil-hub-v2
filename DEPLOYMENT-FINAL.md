@@ -94,7 +94,7 @@ const lockTx = await SupraService.lockVeil(
 ### Links
 - **Deployer**: https://testnet.suprascan.io/account/0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e
 - **Publish TX**: https://testnet.suprascan.io/tx/0x57b4e95d265b726c05ada323770ce57d3f8bd7f25f5af6c8f5a8964fd8fca6d0
-- **Frontend**: https://veil-hub-v2.vercel.app
+- **Frontend**: https://veil-hub-mvm.vercel.app
 - **GitHub**: https://github.com/Thabiiey411beta/veil-hub-v2
 
 ### Metrics

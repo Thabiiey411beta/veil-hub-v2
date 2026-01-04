@@ -58,7 +58,7 @@ All modules deployed at deployer address: `0x2d67de8ca7388ce996b1da083b0d291e874
 ## Frontend Integration
 
 Frontend updated with deployed addresses:
-- **App URL**: https://veil-hub-v2.vercel.app
+- **App URL**: https://veil-hub-mvm.vercel.app
 - **GitHub**: https://github.com/Thabiiey411beta/veil-hub-v2
 
 ## Explorer Links
@@ -81,7 +81,7 @@ Frontend updated with deployed addresses:
 Test the protocol:
 ```bash
 # Visit app
-https://veil-hub-v2.vercel.app
+https://veil-hub-mvm.vercel.app
 
 # Connect StarKey Wallet
 # Interact with protocol features

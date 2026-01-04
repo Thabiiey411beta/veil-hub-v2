@@ -18,7 +18,7 @@
    - Private Key: `0x1c8d05fe8e1522b842d997f9f64dc765ee57154ba3258799aea100cf0fa98dd3`
 
 4. **Frontend Ready** - Deployed on Vercel
-   - URL: https://veil-hub-v2.vercel.app
+   - URL: https://veil-hub-mvm.vercel.app
    - Contract addresses configured
 
 5. **Automation Configured** - AutoFi tasks ready
@@ -94,7 +94,7 @@ supra move run \
 ## 🔗 Links
 
 - **GitHub**: https://github.com/Thabiiey411beta/veil-hub-v2
-- **Frontend**: https://veil-hub-v2.vercel.app
+- **Frontend**: https://veil-hub-mvm.vercel.app
 - **Explorer**: https://testnet.suprascan.io/account/0x2d67de8ca7388ce996b1da083b0d291e874b4c932377cd749b56bc798ecd5a5e
 - **Supra Docs**: https://docs.supra.com
 
