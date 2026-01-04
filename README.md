@@ -58,11 +58,13 @@ Veil Hub v14 is a next-generation DeFi protocol built on Supra L1 that combines:
 - Interest split: 50% Immortal Reserve, 30% Buyback, 20% veVEIL
 
 #### 2. Immortal Reserve (Perpetual Dividends)
-- Burn $VEIL → Receive Immortal Shares
-- Progressive burn bonuses:
-  - 0-100M burned: **1.5x shares**
-  - 100-300M burned: **1.25x shares**
-  - 300M+ burned: **1.0x shares**
+- Lock $VEIL → Receive Immortal Shares
+- Progressive lock bonuses:
+  - 1 Week: **1.0x shares**
+  - 1 Month: **1.25x shares**
+  - 3 Months: **1.5x shares**
+  - 1 Year: **2.0x shares**
+  - 4 Years: **2.5x shares**
 - Weekly USDC dividends (1.5% base rate)
 - veVEIL boost up to 2.5x
 
@@ -184,23 +186,23 @@ lib/
 
 ### Scarcity Mechanisms
 
-1. **Burn-to-Earn**: Permanent supply reduction
+1. **Lock-to-Earn**: Earn yield by locking VEIL
 2. **Vault Fee Burn**: 60% of performance fees
 3. **Buyback & Burn**: 30% of borrow interest
-4. **Progressive Bonuses**: Early burners get 1.5x shares
+4. **Progressive Bonuses**: Longer locks get higher multipliers
 5. **veVEIL Lock**: Removes circulating supply
 
-### Projected Supply Reduction
+### Projected Lock Growth
 
 **Conservative ($100M TVL):**
-- Year 1: 52M burned (5.2%)
-- Year 3: 200M burned (20%)
-- Year 5: 400M burned (40%)
+- Year 1: 200M locked (20%)
+- Year 3: 350M locked (35%)
+- Year 5: 550M locked (55%)
 
 **Aggressive ($1B TVL):**
-- Year 1: 210M burned (21%)
-- Year 3: 500M burned (50%)
-- Year 5: 700M burned (70%)
+- Year 1: 300M locked (30%)
+- Year 3: 500M locked (50%)
+- Year 5: 700M locked (70%)
 
 ---
 

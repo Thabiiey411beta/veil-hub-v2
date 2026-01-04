@@ -7,21 +7,21 @@ import { GradientCard, StatCounter, AnimatedBadge } from '@/components/EnhancedU
 
 export default function TokenomicsPage() {
   const supplyProjection = [
-    { year: 'Year 0', total: 1000, burned: 0, circulating: 1000 },
-    { year: 'Year 1', total: 948, burned: 52, circulating: 896 },
-    { year: 'Year 2', total: 875, burned: 125, circulating: 750 },
-    { year: 'Year 3', total: 800, burned: 200, circulating: 600 },
-    { year: 'Year 4', total: 700, burned: 300, circulating: 400 },
-    { year: 'Year 5', total: 600, burned: 400, circulating: 200 },
+    { year: 'Year 0', total: 1000, locked: 0, circulating: 1000 },
+    { year: 'Year 1', total: 1000, locked: 200, circulating: 800 },
+    { year: 'Year 2', total: 1000, locked: 350, circulating: 650 },
+    { year: 'Year 3', total: 1000, locked: 450, circulating: 550 },
+    { year: 'Year 4', total: 1000, locked: 500, circulating: 500 },
+    { year: 'Year 5', total: 1000, locked: 550, circulating: 450 },
   ]
 
-  const burnRateData = [
-    { date: 'Week 1', rate: 2.1, cumulative: 2.1 },
-    { date: 'Week 2', rate: 2.8, cumulative: 4.9 },
-    { date: 'Week 3', rate: 3.2, cumulative: 8.1 },
-    { date: 'Week 4', rate: 3.5, cumulative: 11.6 },
-    { date: 'Week 5', rate: 4.1, cumulative: 15.7 },
-    { date: 'Week 6', rate: 4.8, cumulative: 20.5 },
+  const lockRateData = [
+    { date: 'Week 1', rate: 15, cumulative: 15 },
+    { date: 'Week 2', rate: 22, cumulative: 37 },
+    { date: 'Week 3', rate: 28, cumulative: 65 },
+    { date: 'Week 4', rate: 35, cumulative: 100 },
+    { date: 'Week 5', rate: 42, cumulative: 142 },
+    { date: 'Week 6', rate: 48, cumulative: 190 },
   ]
 
   const vestingSchedule = [
@@ -47,13 +47,13 @@ export default function TokenomicsPage() {
             <StatCounter value="1B" label="Total Supply" />
           </GradientCard>
           <GradientCard>
-            <StatCounter value="52M" label="Total Burned" suffix="(5.2%)" />
+            <StatCounter value="450M" label="Total Locked" suffix="(45%)" />
           </GradientCard>
           <GradientCard>
-            <StatCounter value="948M" label="Remaining Supply" />
+            <StatCounter value="550M" label="Circulating Supply" />
           </GradientCard>
           <GradientCard>
-            <StatCounter value="4.8M" label="Weekly Burn Rate" />
+            <StatCounter value="2.5x" label="Max Lock Boost" />
           </GradientCard>
         </div>
 
@@ -80,16 +80,16 @@ export default function TokenomicsPage() {
                 />
                 <Legend />
                 <Area type="monotone" dataKey="total" stroke="#FFD700" fillOpacity={1} fill="url(#colorSupply)" />
-                <Line type="monotone" dataKey="burned" stroke="#ef4444" strokeWidth={2} />
+                <Line type="monotone" dataKey="locked" stroke="#8b5cf6" strokeWidth={2} />
               </AreaChart>
             </ResponsiveContainer>
           </GradientCard>
 
-          {/* Burn Rate Tracker */}
+          {/* Lock Rate Tracker */}
           <GradientCard>
-            <h3 className="text-lg font-bold mb-4">Burn Rate Tracker</h3>
+            <h3 className="text-lg font-bold mb-4">Lock Rate Tracker</h3>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={burnRateData}>
+              <BarChart data={lockRateData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#333" />
                 <XAxis dataKey="date" stroke="#808080" />
                 <YAxis stroke="#808080" />
@@ -100,7 +100,7 @@ export default function TokenomicsPage() {
                 />
                 <Legend />
                 <Bar dataKey="rate" fill="#FFD700" radius={[8, 8, 0, 0]} />
-                <Line type="monotone" dataKey="cumulative" stroke="#ef4444" strokeWidth={2} />
+                <Line type="monotone" dataKey="cumulative" stroke="#8b5cf6" strokeWidth={2} />
               </BarChart>
             </ResponsiveContainer>
           </GradientCard>
@@ -161,13 +161,13 @@ export default function TokenomicsPage() {
           </GradientCard>
 
           <GradientCard>
-            <h3 className="text-lg font-bold mb-4">Burn Mechanisms</h3>
+            <h3 className="text-lg font-bold mb-4">Lock-to-Earn Mechanisms</h3>
             <div className="space-y-3">
               {[
+                { label: 'Lock VEIL', value: '1-4 Years', desc: 'Earn up to 2.5x boost' },
                 { label: 'Vault Fee Burn', value: '60%', desc: 'Performance fees' },
                 { label: 'Buyback & Burn', value: '30%', desc: 'Borrow interest' },
-                { label: 'Burn-to-Earn', value: 'Variable', desc: 'User burns' },
-                { label: 'Protocol Burn', value: 'On-demand', desc: 'Treasury burns' },
+                { label: 'Protocol Rewards', value: 'Variable', desc: 'Treasury rewards' },
               ].map((item, i) => (
                 <div key={i} className="bg-[#0A0A0A] border border-[#FFD700]/20 rounded-lg p-3">
                   <div className="flex justify-between items-start mb-1">

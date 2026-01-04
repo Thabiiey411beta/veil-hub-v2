@@ -3,17 +3,17 @@
 import React, { useState, useEffect } from 'react'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { SuggestionPanel } from '@/components/SuggestionPanel'
-import { GradientCard, RippleButton } from '@/components/EnhancedUI'
+import { GradientCard, RippleButton, AnimatedBadge } from '@/components/EnhancedUI'
 import { generateChartData } from '@/lib/chart-data'
 
 export default function DEXPage() {
   const [chartData, setChartData] = useState<any[]>([])
   const [selectedPair, setSelectedPair] = useState('BTC/USDC')
+  const [tradingMode, setTradingMode] = useState<'spot' | 'futures' | 'options'>('spot')
   const [orderBook, setOrderBook] = useState<{ bids: Array<{ price: number; size: number; total: number }>; asks: Array<{ price: number; size: number; total: number }> }>({ bids: [], asks: [] })
 
   useEffect(() => {
     setChartData(generateChartData(30))
-    // Generate mock order book
     setOrderBook({
       bids: [
         { price: 42840, size: 2.5, total: 106800 },
@@ -34,13 +34,40 @@ export default function DEXPage() {
 
   const pairs = ['BTC/USDC', 'ETH/USDC', 'LINK/USDC', 'AVAX/USDC', 'VEIL/USDC']
 
+  const futuresPositions = [
+    { pair: 'BTC/USDC', side: 'Long', size: 2.5, entry: 42800, current: 42850, pnl: '+$1,250', roi: '+1.17%' },
+    { pair: 'ETH/USDC', side: 'Short', size: 10, entry: 2500, current: 2450, pnl: '+$500', roi: '+2.0%' },
+  ]
+
+  const optionsContracts = [
+    { pair: 'BTC/USDC', type: 'Call', strike: 45000, expiry: '7d', premium: 0.5, iv: '45%', delta: 0.65 },
+    { pair: 'ETH/USDC', type: 'Put', strike: 2200, expiry: '14d', premium: 0.3, iv: '52%', delta: -0.42 },
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A0A0A] via-[#1a1a2e] to-[#0A0A0A] text-[#E0E0E0] p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Perpetual DEX</h1>
-          <p className="text-[#B0B0B0]">Advanced trading with LP VACUUM</p>
+          <p className="text-[#B0B0B0]">Spot, Futures & Options Trading with LP VACUUM</p>
+        </div>
+
+        {/* Trading Mode Tabs */}
+        <div className="flex gap-2 mb-8">
+          {(['spot', 'futures', 'options'] as const).map(mode => (
+            <button
+              key={mode}
+              onClick={() => setTradingMode(mode)}
+              className={`px-6 py-2 rounded-lg font-bold transition-all ${
+                tradingMode === mode
+                  ? 'bg-[#FFD700] text-[#0A0A0A]'
+                  : 'bg-[#333] text-[#E0E0E0] hover:bg-[#444]'
+              }`}
+            >
+              {mode.charAt(0).toUpperCase() + mode.slice(1)}
+            </button>
+          ))}
         </div>
 
         {/* Trading Interface */}
@@ -81,63 +108,159 @@ export default function DEXPage() {
             </GradientCard>
           </div>
 
-          {/* Swap Panel */}
+          {/* Trading Panel */}
           <GradientCard>
-            <h3 className="text-lg font-bold mb-4">Quick Swap</h3>
+            <h3 className="text-lg font-bold mb-4">
+              {tradingMode === 'spot' && '💱 Quick Swap'}
+              {tradingMode === 'futures' && '📈 Open Position'}
+              {tradingMode === 'options' && '📊 Buy Option'}
+            </h3>
             <div className="space-y-4">
-              <div>
-                <label className="text-sm text-[#B0B0B0] mb-2 block">From</label>
-                <input
-                  type="number"
-                  placeholder="0.00"
-                  className="w-full bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0] placeholder-[#666] focus:outline-none focus:border-[#FFD700]"
-                />
-                <select className="w-full mt-2 bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0]">
-                  <option>BTC</option>
-                  <option>ETH</option>
-                  <option>USDC</option>
-                </select>
-              </div>
+              {tradingMode === 'spot' && (
+                <>
+                  <div>
+                    <label className="text-sm text-[#B0B0B0] mb-2 block">From</label>
+                    <input type="number" placeholder="0.00" className="w-full bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0] placeholder-[#666] focus:outline-none focus:border-[#FFD700]" />
+                    <select className="w-full mt-2 bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0]">
+                      <option>BTC</option>
+                      <option>ETH</option>
+                      <option>USDC</option>
+                    </select>
+                  </div>
+                  <button className="w-full bg-[#FFD700]/20 border border-[#FFD700]/50 rounded-lg p-2 text-[#FFD700] hover:bg-[#FFD700]/30 transition-all">⇅ Swap</button>
+                  <div>
+                    <label className="text-sm text-[#B0B0B0] mb-2 block">To</label>
+                    <input type="number" placeholder="0.00" className="w-full bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0] placeholder-[#666] focus:outline-none focus:border-[#FFD700]" />
+                    <select className="w-full mt-2 bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0]">
+                      <option>USDC</option>
+                      <option>ETH</option>
+                      <option>BTC</option>
+                    </select>
+                  </div>
+                  <RippleButton className="w-full">Execute Swap</RippleButton>
+                </>
+              )}
 
-              <button className="w-full bg-[#FFD700]/20 border border-[#FFD700]/50 rounded-lg p-2 text-[#FFD700] hover:bg-[#FFD700]/30 transition-all">
-                ⇅ Swap
-              </button>
+              {tradingMode === 'futures' && (
+                <>
+                  <div>
+                    <label className="text-sm text-[#B0B0B0] mb-2 block">Position Size</label>
+                    <input type="number" placeholder="0.00" className="w-full bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0] placeholder-[#666] focus:outline-none focus:border-[#FFD700]" />
+                  </div>
+                  <div>
+                    <label className="text-sm text-[#B0B0B0] mb-2 block">Leverage</label>
+                    <select className="w-full bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0]">
+                      <option>1x</option>
+                      <option>2x</option>
+                      <option>5x</option>
+                      <option>10x</option>
+                      <option>20x</option>
+                    </select>
+                  </div>
+                  <div className="flex gap-2">
+                    <RippleButton className="flex-1 bg-[#10b981]/20 border border-[#10b981] text-[#10b981]">Long</RippleButton>
+                    <RippleButton className="flex-1 bg-[#ef4444]/20 border border-[#ef4444] text-[#ef4444]">Short</RippleButton>
+                  </div>
+                </>
+              )}
 
-              <div>
-                <label className="text-sm text-[#B0B0B0] mb-2 block">To</label>
-                <input
-                  type="number"
-                  placeholder="0.00"
-                  className="w-full bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0] placeholder-[#666] focus:outline-none focus:border-[#FFD700]"
-                />
-                <select className="w-full mt-2 bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0]">
-                  <option>USDC</option>
-                  <option>ETH</option>
-                  <option>BTC</option>
-                </select>
-              </div>
-
-              <div className="bg-[#0A0A0A] border border-[#FFD700]/20 rounded-lg p-3 text-sm">
-                <div className="flex justify-between mb-2">
-                  <span className="text-[#B0B0B0]">Price Impact</span>
-                  <span className="text-[#FFD700]">0.12%</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[#B0B0B0]">Slippage</span>
-                  <span className="text-[#FFD700]">0.5%</span>
-                </div>
-              </div>
-
-              <RippleButton className="w-full">
-                Execute Swap
-              </RippleButton>
+              {tradingMode === 'options' && (
+                <>
+                  <div>
+                    <label className="text-sm text-[#B0B0B0] mb-2 block">Strike Price</label>
+                    <input type="number" placeholder="0.00" className="w-full bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0] placeholder-[#666] focus:outline-none focus:border-[#FFD700]" />
+                  </div>
+                  <div>
+                    <label className="text-sm text-[#B0B0B0] mb-2 block">Expiry</label>
+                    <select className="w-full bg-[#0A0A0A] border border-[#FFD700]/30 rounded-lg p-3 text-[#E0E0E0]">
+                      <option>7 Days</option>
+                      <option>14 Days</option>
+                      <option>30 Days</option>
+                      <option>90 Days</option>
+                    </select>
+                  </div>
+                  <div className="flex gap-2">
+                    <RippleButton className="flex-1 bg-[#10b981]/20 border border-[#10b981] text-[#10b981]">Call</RippleButton>
+                    <RippleButton className="flex-1 bg-[#ef4444]/20 border border-[#ef4444] text-[#ef4444]">Put</RippleButton>
+                  </div>
+                </>
+              )}
             </div>
           </GradientCard>
         </div>
 
+        {/* Futures Positions */}
+        {tradingMode === 'futures' && (
+          <GradientCard className="mb-8">
+            <h3 className="text-lg font-bold mb-4">📈 Open Positions</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-[#FFD700]/10">
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Pair</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Side</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Size</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Entry</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Current</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">P&L</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">ROI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {futuresPositions.map((pos, i) => (
+                    <tr key={i} className="border-b border-[#FFD700]/5 hover:bg-[#FFD700]/5">
+                      <td className="py-3 px-4 font-semibold">{pos.pair}</td>
+                      <td className={`py-3 px-4 font-bold ${pos.side === 'Long' ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>{pos.side}</td>
+                      <td className="py-3 px-4">{pos.size}</td>
+                      <td className="py-3 px-4 text-[#B0B0B0]">${pos.entry.toLocaleString()}</td>
+                      <td className="py-3 px-4 text-[#FFD700]">${pos.current.toLocaleString()}</td>
+                      <td className="py-3 px-4 text-[#10b981] font-bold">{pos.pnl}</td>
+                      <td className="py-3 px-4 text-[#10b981] font-bold">{pos.roi}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </GradientCard>
+        )}
+
+        {/* Options Contracts */}
+        {tradingMode === 'options' && (
+          <GradientCard className="mb-8">
+            <h3 className="text-lg font-bold mb-4">📊 Available Options</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-[#FFD700]/10">
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Pair</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Type</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Strike</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Expiry</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Premium</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">IV</th>
+                    <th className="text-left py-3 px-4 text-[#B0B0B0]">Delta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {optionsContracts.map((opt, i) => (
+                    <tr key={i} className="border-b border-[#FFD700]/5 hover:bg-[#FFD700]/5">
+                      <td className="py-3 px-4 font-semibold">{opt.pair}</td>
+                      <td className={`py-3 px-4 font-bold ${opt.type === 'Call' ? 'text-[#10b981]' : 'text-[#ef4444]'}`}>{opt.type}</td>
+                      <td className="py-3 px-4 text-[#FFD700]">${opt.strike.toLocaleString()}</td>
+                      <td className="py-3 px-4 text-[#B0B0B0]">{opt.expiry}</td>
+                      <td className="py-3 px-4 text-[#FFD700]">{opt.premium}</td>
+                      <td className="py-3 px-4 text-[#8b5cf6]">{opt.iv}</td>
+                      <td className="py-3 px-4 text-[#06b6d4]">{opt.delta}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </GradientCard>
+        )}
+
         {/* Order Book */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Bids */}
           <GradientCard>
             <h3 className="text-lg font-bold mb-4 text-[#10b981]">Buy Orders (Bids)</h3>
             <div className="space-y-2">
@@ -156,7 +279,6 @@ export default function DEXPage() {
             </div>
           </GradientCard>
 
-          {/* Asks */}
           <GradientCard>
             <h3 className="text-lg font-bold mb-4 text-[#ef4444]">Sell Orders (Asks)</h3>
             <div className="space-y-2">
