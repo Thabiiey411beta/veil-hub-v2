@@ -20,6 +20,7 @@ const navItems: NavItem[] = [
   { label: 'Vaults', href: '/vaults', icon: '🏦', category: 'protocol' },
   { label: 'Governance', href: '/governance', icon: '🗳️', category: 'protocol' },
   { label: 'Borrow', href: '/borrow', icon: '💰', category: 'protocol' },
+  { label: 'Community', href: '/community', icon: '👥', category: 'info' },
   { label: 'Docs', href: '/docs', icon: '📚', category: 'info' },
   { label: 'Magic', href: '/magic', icon: '✨', category: 'tools' },
 ]
@@ -32,7 +33,7 @@ export const Sidebar: React.FC = () => {
     main: 'Main',
     trading: 'Trading',
     protocol: 'Protocol',
-    info: 'Information',
+    info: 'Community',
     tools: 'Tools',
   }
 
